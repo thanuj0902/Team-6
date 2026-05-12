@@ -1,0 +1,80 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  role          String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  salaryPoints  SalaryPoint[]
+  resumeScores  ResumeScore[]
+  offerAnalyses OfferAnalysis[]
+}
+
+model SalaryPoint {
+  id           String   @id @default(cuid())
+  userId       String?
+  user         User?     @relation(fields: [userId], references: [id])
+
+  role         String   // e.g., "Software Engineer"
+  experience   Int      // Years
+  city         String   // e.g., "Bangalore"
+  company      String?
+  companyTier  String   // Tier1, Tier2, etc.
+
+  baseSalary    Float
+  bonus         Float?
+  equity        Float?
+  totalCTC      Float
+
+  createdAt     DateTime @default(now())
+
+  @@index([role])
+  @@index([city])
+  @@index([company])
+}
+
+model ResumeScore {
+  id              String   @id @default(cuid())
+  userId          String?
+  user            User?    @relation(fields: [userId], references: [id])
+
+  overallScore    Int
+  atsScore        Int
+  role            String
+  level           String   // Junior, Mid, Senior, Staff
+
+  missingKeywords String[]
+  strengths       String[]
+  improvements    String[]
+
+  createdAt       DateTime @default(now())
+}
+
+model OfferAnalysis {
+  id            String   @id @default(cuid())
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id])
+
+  company       String
+  role          String
+  city          String
+  expLevel      String   // "2-5 yrs" etc
+
+  totalCTC      Float
+  verdict       String   // "Competitive", "Strong", etc.
+
+  createdAt     DateTime @default(now())
+
+  @@index([company])
+}
