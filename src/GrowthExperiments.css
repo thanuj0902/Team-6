@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+.ge-page {
+  min-height: 100vh;
+  background: linear-gradient(145deg, #020818 0%, #040d20 35%, #060f1c 60%, #030a14 100%);
+  color: #e0e0f0;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+.ge-header {
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(24px);
+  position: sticky;
+  top: 0;
+  background: rgba(13,11,34,0.82);
+  border-bottom: 1px solid rgba(99,102,241,0.13);
+  z-index: 20;
+}
+
+.ge-header-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ge-dot {
+  width: 8px;
+  height: 8px;
+  background: #ec4899;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ec4899;
+}
+
+.ge-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+.ge-logo-highlight {
+  color: #ec4899;
+}
+
+.ge-separator {
+  color: rgba(99,102,241,0.3);
+  margin: 0 6px;
+}
+
+.ge-growth-label {
+  font-size: 11px;
+  color: #a5b4fc;
+  letter-spacing: 0.1em;
+}
+
+.ge-header-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.ge-dashboard-btn {
+  padding: 6px 12px;
+  font-size: 11px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  color: #8890b0;
+  cursor: pointer;
+}
+
+.ge-spacer {
+  flex: 1;
+}
+
+.ge-container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  background: transparent;
+  color: #697298;
+}
+
+.tab-btn.active {
+  border-color: #ec4899;
+  background: rgba(236,72,153,0.12);
+  color: #f9a8d4;
+  font-weight: 600;
+}
+
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.ge-section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.ge-page-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.ge-page-title-highlight {
+  color: #ec4899;
+}
+
+.ge-page-subtitle {
+  color: #697298;
+  font-size: 13px;
+}
+
+.ge-tab-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  justify-content: center;
+}
+
+.ge-emoji-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.ge-card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.ge-card-text {
+  color: #697298;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.ge-card-text-lg {
+  color: #697298;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.ge-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.ge-inline-input {
+  flex: 1;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: #a5b4fc;
+  font-size: 12px;
+  font-family: monospace;
+  outline: none;
+}
+
+.ge-email-input {
+  flex: 1;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: #e8e8f0;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+}
+
+.ge-primary-btn {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #ec4899, #db2777);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.ge-invite-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ec4899, #db2777);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.ge-card-footnote {
+  font-size: 11px;
+  color: #4a5070;
+}
+
+.ge-share-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ge-invite-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.ge-share-twitter { background: #1da1f2; color: #fff; }
+.ge-share-linkedin { background: #0a66c2; color: #fff; }
+.ge-share-whatsapp { background: #25d366; color: #fff; }

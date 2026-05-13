@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './GrowthExperiments.css';
 
 export default function GrowthExperiments() {
   const [tab, setTab] = useState('refer');
@@ -55,52 +56,29 @@ export default function GrowthExperiments() {
   const navigateTo = (tab) => window.dispatchEvent(new CustomEvent('changeTab', { detail: tab }));
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(145deg, #020818 0%, #040d20 35%, #060f1c 60%, #030a14 100%)',
-      color: '#e0e0f0',
-      fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-    }}>
-      <header style={{ padding:"18px 32px",display:"flex",alignItems:"center",backdropFilter:"blur(24px)",position:"sticky",top:0,background:"rgba(13,11,34,0.82)",borderBottom:"1px solid rgba(99,102,241,0.13)",zIndex:20 }}>
-        <div style={{ flex:1,display:"flex",alignItems:"center",gap:12 }}>
-          <div style={{ width:8,height:8,background:"#ec4899",borderRadius:"50%",boxShadow:"0 0 8px #ec4899" }}/>
-          <span style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:16,letterSpacing:"0.1em",color:"#fff" }}>TALENT<span style={{ color:"#ec4899" }}>DASH</span></span>
-          <span style={{ color:"rgba(99,102,241,0.3)",margin:"0 6px" }}>·</span>
-          <span style={{ fontSize:11,color:"#a5b4fc",letterSpacing:"0.1em" }}>GROWTH</span>
+    <div className="ge-page">
+      <header className="ge-header">
+        <div className="ge-header-left">
+          <div className="ge-dot" />
+          <span className="ge-logo">TALENT<span className="ge-logo-highlight">DASH</span></span>
+          <span className="ge-separator">·</span>
+          <span className="ge-growth-label">GROWTH</span>
         </div>
-        <div style={{ display:"flex",gap:6,alignItems:"center" }}>
-          <button onClick={() => navigateTo('hub')} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Dashboard</button>
+        <div className="ge-header-actions">
+          <button onClick={() => navigateTo('hub')} className="ge-dashboard-btn">Dashboard</button>
         </div>
-        <div style={{ flex:1 }}/>
+        <div className="ge-spacer" />
       </header>
 
-      <div style={{ maxWidth: 640, margin: '0 auto', padding: '40px 24px' }}>
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
-          .tab-btn {
-            padding:10px 20px;border-radius:8px;font-size:12px;font-family:inherit;cursor:pointer;
-            transition:all 0.2s;border:1.5px solid rgba(255,255,255,0.08);background:transparent;color:#697298;
-          }
-          .tab-btn.active { border-color:#ec4899;background:rgba(236,72,153,0.12);color:#f9a8d4;font-weight:600; }
-          .card {
-            background: rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
-            border-radius:16px;padding:24px;text-align:center;
-          }
-          .share-btn {
-            display:flex;align-items:center;justify-content:center;gap:8;
-            width:100%;padding:14px;border-radius:10px;border:none;
-            font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;
-          }
-        `}</style>
-
-        <div style={{ textAlign:'center',marginBottom:40 }}>
-          <h1 style={{ fontFamily:"'Syne',sans-serif",fontSize:36,fontWeight:800,color:'#fff',marginBottom:8 }}>
-            <span style={{ color:'#ec4899' }}>Growth</span> Experiments
+      <div className="ge-container">
+        <div className="ge-section-header">
+          <h1 className="ge-page-title">
+            <span className="ge-page-title-highlight">Growth</span> Experiments
           </h1>
-          <p style={{ color:'#697298',fontSize:13 }}>Share TalentDash with friends and help us grow the community.</p>
+          <p className="ge-page-subtitle">Share TalentDash with friends and help us grow the community.</p>
         </div>
 
-        <div style={{ display:'flex',gap:8,marginBottom:28,justifyContent:'center' }}>
+        <div className="ge-tab-row">
           <button className={`tab-btn ${tab === 'refer' ? 'active' : ''}`} onClick={() => setTab('refer')}>🔗 Refer & Earn</button>
           <button className={`tab-btn ${tab === 'share' ? 'active' : ''}`} onClick={() => setTab('share')}>📤 Share Results</button>
           <button className={`tab-btn ${tab === 'invite' ? 'active' : ''}`} onClick={() => setTab('invite')}>✉️ Invite Friends</button>
@@ -108,43 +86,36 @@ export default function GrowthExperiments() {
 
         {tab === 'refer' && (
           <div className="card">
-            <div style={{ fontSize:48,marginBottom:12 }}>🔗</div>
-            <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:22,color:'#fff',marginBottom:8 }}>Refer & Earn Points</h2>
-            <p style={{ color:'#697298',fontSize:13,lineHeight:1.7,marginBottom:20 }}>
+            <div className="ge-emoji-icon">🔗</div>
+            <h2 className="ge-card-title">Refer & Earn Points</h2>
+            <p className="ge-card-text">
               Share your referral link. When friends join and complete their activation, you earn bonus points.
             </p>
-            <div style={{ display:'flex',gap:8,marginBottom:16 }}>
-              <input readOnly value={referralLink} style={{
-                flex:1,padding:'12px 16px',background:'rgba(255,255,255,0.05)',
-                border:'1px solid rgba(255,255,255,0.1)',borderRadius:10,
-                color:'#a5b4fc',fontSize:12,fontFamily:'monospace',outline:'none',
-              }} />
-              <button onClick={() => shareResults('copy')} style={{
-                padding:'12px 20px',background:'linear-gradient(135deg,#ec4899,#db2777)',
-                color:'#fff',border:'none',borderRadius:10,cursor:'pointer',fontWeight:600,fontSize:12,
-              }}>
+            <div className="ge-input-row">
+              <input readOnly value={referralLink} className="ge-inline-input" />
+              <button onClick={() => shareResults('copy')} className="ge-primary-btn">
                 {copied ? 'Copied!' : 'Copy'}
               </button>
             </div>
-            <div style={{ fontSize:11,color:'#4a5070' }}>Earn 50 points per referral who completes activation</div>
+            <div className="ge-card-footnote">Earn 50 points per referral who completes activation</div>
           </div>
         )}
 
         {tab === 'share' && (
           <div className="card">
-            <div style={{ fontSize:48,marginBottom:12 }}>📤</div>
-            <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:22,color:'#fff',marginBottom:8 }}>Share Your Results</h2>
-            <p style={{ color:'#697298',fontSize:13,lineHeight:1.7,marginBottom:24 }}>
+            <div className="ge-emoji-icon">📤</div>
+            <h2 className="ge-card-title">Share Your Results</h2>
+            <p className="ge-card-text-lg">
               Spread the word on social media. Every share helps someone discover their market worth.
             </p>
-            <div style={{ display:'flex',flexDirection:'column',gap:10 }}>
-              <button className="share-btn" style={{ background:'#1da1f2',color:'#fff' }} onClick={() => shareResults('twitter')}>
+            <div className="ge-share-stack">
+              <button className="share-btn ge-share-twitter" onClick={() => shareResults('twitter')}>
                 <span>🐦</span> Share on Twitter
               </button>
-              <button className="share-btn" style={{ background:'#0a66c2',color:'#fff' }} onClick={() => shareResults('linkedin')}>
+              <button className="share-btn ge-share-linkedin" onClick={() => shareResults('linkedin')}>
                 <span>💼</span> Share on LinkedIn
               </button>
-              <button className="share-btn" style={{ background:'#25d366',color:'#fff' }} onClick={() => shareResults('whatsapp')}>
+              <button className="share-btn ge-share-whatsapp" onClick={() => shareResults('whatsapp')}>
                 <span>💬</span> Share on WhatsApp
               </button>
             </div>
@@ -153,26 +124,19 @@ export default function GrowthExperiments() {
 
         {tab === 'invite' && (
           <div className="card">
-            <div style={{ fontSize:48,marginBottom:12 }}>✉️</div>
-            <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:22,color:'#fff',marginBottom:8 }}>Invite via Email</h2>
-            <p style={{ color:'#697298',fontSize:13,lineHeight:1.7,marginBottom:20 }}>
+            <div className="ge-emoji-icon">✉️</div>
+            <h2 className="ge-card-title">Invite via Email</h2>
+            <p className="ge-card-text">
               Send a personalized invite to your friends and colleagues.
             </p>
-            <div style={{ display:'flex',gap:8 }}>
+            <div className="ge-invite-input-row">
               <input
                 placeholder="friend@email.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                style={{
-                  flex:1,padding:'12px 16px',background:'rgba(255,255,255,0.05)',
-                  border:'1px solid rgba(255,255,255,0.1)',borderRadius:10,
-                  color:'#e8e8f0',fontSize:13,fontFamily:'inherit',outline:'none',
-                }}
+                className="ge-email-input"
               />
-              <button onClick={sendInvite} style={{
-                padding:'12px 24px',background:'linear-gradient(135deg,#ec4899,#db2777)',
-                color:'#fff',border:'none',borderRadius:10,cursor:'pointer',fontWeight:600,fontSize:12,
-              }}>
+              <button onClick={sendInvite} className="ge-invite-btn">
                 {sent ? 'Sent!' : 'Invite'}
               </button>
             </div>

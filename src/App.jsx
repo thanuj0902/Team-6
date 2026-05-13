@@ -33,13 +33,8 @@ function App() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#020818',
-      color: 'white',
-      fontFamily: 'sans-serif'
-    }}>
-      <main style={{ padding: '20px' }}>
+    <div className="min-h-screen bg-[#020818] text-white font-sans">
+      <main className="p-5">
         {tabs[activeTab].component}
       </main>
     </div>

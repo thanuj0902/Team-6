@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import './ResumeAnalyzer.css'
 
 const SAMPLE_RESUME = `John Doe | john@email.com | linkedin.com/in/johndoe | Bangalore
 
@@ -233,7 +234,7 @@ export default function ResumeAnalyzer() {
       <svg
         width={size}
         height={size}
-        style={{ transform: "rotate(-90deg)" }}
+        className="ra-gauge-svg"
       >
         <circle
           cx={size / 2}
@@ -282,181 +283,36 @@ export default function ResumeAnalyzer() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background:
-          "linear-gradient(145deg, #020818 0%, #040d20 35%, #060f1c 60%, #030a14 100%)",
-        color: "#e0e0f0",
-        fontFamily: "'Space Grotesk', sans-serif",
-      }}
-    >
-      <header style={{ display:"flex",alignItems:"center",backdropFilter:"blur(24px)",position:"sticky",top:0,background:"rgba(13,11,34,0.82)",zIndex:20 }}>
-        <div style={{ flex:1,display:"flex",alignItems:"center",gap:12 }}>
-          <div style={{ width:8,height:8,background:"#00ff9d",borderRadius:"50%",boxShadow:"0 0 8px #00ff9d" }}/>
-          <span style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:16,letterSpacing:"0.1em",color:"#fff" }}>TALENT<span style={{ color:"#00ff9d" }}>DASH</span></span>
-          <span style={{ color:"rgba(99,102,241,0.3)",margin:"0 6px" }}>·</span>
-          <span style={{ fontSize:11,color:"#a5b4fc",letterSpacing:"0.1em" }}>RESUME ANALYZER</span>
+    <div className="ra-wrapper">
+      <header className="ra-header">
+        <div className="ra-header-left">
+          <div className="ra-logo-dot"/>
+          <span className="ra-logo">TALENT<span className="ra-logo-accent">DASH</span></span>
+          <span className="ra-sep">·</span>
+          <span className="ra-badge">RESUME ANALYZER</span>
         </div>
-        <div style={{ display:"flex",gap:6,alignItems:"center" }}>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Dashboard</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'offer'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Offer</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Salary</button>
+        <div className="ra-header-nav">
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} className="ra-header-btn">Dashboard</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'offer'}))} className="ra-header-btn">Offer</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} className="ra-header-btn">Salary</button>
         </div>
-        <div style={{ flex:1 }}/>
+        <div className="ra-header-spacer"/>
       </header>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
-        * {
-          box-sizing: border-box;
-        }
-
-        .textarea-resume {
-          width: 100%;
-          min-height: 240px;
-          padding: 16px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(0,255,157,0.15);
-          border-radius: 12px;
-          color: #c8d0e8;
-          resize: vertical;
-          outline: none;
-          line-height: 1.6;
-        }
-
-        .textarea-resume:focus {
-          border-color: #00ff9d;
-        }
-
-        .chip {
-          padding: 8px 16px;
-          border-radius: 8px;
-          border: 1px solid rgba(0,255,157,0.15);
-          background: rgba(255,255,255,0.03);
-          color: #7f88b2;
-          cursor: pointer;
-          transition: 0.2s;
-        }
-
-        .chip.active {
-          background: rgba(0,255,157,0.1);
-          border-color: #00ff9d;
-          color: #00ff9d;
-        }
-
-        .btn-analyze {
-          width: 100%;
-          padding: 16px;
-          border: none;
-          border-radius: 12px;
-          background: linear-gradient(135deg,#00ff9d,#00d4ff);
-          color: #020818;
-          font-weight: 700;
-          cursor: pointer;
-          transition: 0.2s;
-        }
-
-        .btn-analyze:hover {
-          transform: translateY(-2px);
-        }
-
-        .card {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(0,255,157,0.08);
-          border-radius: 14px;
-          padding: 20px;
-        }
-
-        .drop-zone {
-          border: 1.5px dashed rgba(0,255,157,0.25);
-          padding: 24px;
-          border-radius: 12px;
-          text-align: center;
-          cursor: pointer;
-          margin-bottom: 14px;
-          transition: 0.2s;
-        }
-
-        .drop-zone:hover {
-          border-color: #00ff9d;
-          background: rgba(0,255,157,0.04);
-        }
-
-        .bar {
-          height: 5px;
-          background: rgba(255,255,255,0.06);
-          border-radius: 999px;
-          overflow: hidden;
-          margin-top: 8px;
-        }
-
-        .bar-fill {
-          height: 100%;
-          border-radius: 999px;
-        }
-
-        .tag {
-          display: inline-block;
-          margin: 4px;
-          padding: 6px 12px;
-          border-radius: 999px;
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(0,255,157,0.15);
-          font-size: 12px;
-          color: #aeb7da;
-        }
-      `}</style>
-
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "40px 24px",
-          display: "grid",
-          gridTemplateColumns: result ? "1fr 1.1fr" : "1fr",
-          gap: 30,
-        }}
-      >
+      <div className={`ra-container ${result ? 'ra-container-split' : 'ra-container-single'}`}>
         <div>
-          <h1
-            style={{
-              fontSize: 42,
-              marginBottom: 8,
-            }}
-          >
-            Resume <span style={{ color: "#00ff9d" }}>Analyzer</span>
+          <h1 className="ra-title">
+            Resume <span className="ra-title-accent">Analyzer</span>
           </h1>
 
-          <p
-            style={{
-              color: "#697298",
-              marginBottom: 30,
-              lineHeight: 1.7,
-            }}
-          >
-            AI-powered ATS analysis, keyword detection, and
-            salary estimation.
+          <p className="ra-sub">
+            AI-powered ATS analysis, keyword detection, and salary estimation.
           </p>
 
-          <div style={{ marginBottom: 18 }}>
-            <div
-              style={{
-                fontSize: 12,
-                marginBottom: 10,
-                color: "#697298",
-              }}
-            >
-              TARGET ROLE
-            </div>
+          <div className="ra-field-group">
+            <div className="ra-field-label">TARGET ROLE</div>
 
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 8,
-              }}
-            >
+            <div className="ra-chip-row">
               {ROLES.map((r) => (
                 <button
                   key={r}
@@ -472,32 +328,13 @@ export default function ResumeAnalyzer() {
           <div
             className="drop-zone"
             onClick={() => fileRef.current?.click()}
-            onDragOver={(e) => {
-              e.preventDefault();
-              setDragOver(true);
-            }}
+            onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
             onDragLeave={() => setDragOver(false)}
-            onDrop={(e) => {
-              e.preventDefault();
-              setDragOver(false);
-              handleFile(e.dataTransfer.files[0]);
-            }}
+            onDrop={(e) => { e.preventDefault(); setDragOver(false); handleFile(e.dataTransfer.files[0]); }}
           >
-            <input
-              ref={fileRef}
-              type="file"
-              accept=".txt,.md"
-              style={{ display: "none" }}
-              onChange={(e) =>
-                handleFile(e.target.files[0])
-              }
-            />
-
-            <div style={{ fontSize: 28 }}>⬆</div>
-
-            <div style={{ marginTop: 8, color: "#697298" }}>
-              Upload .txt or .md resume
-            </div>
+            <input ref={fileRef} type="file" accept=".txt,.md" className="hidden" onChange={(e) => handleFile(e.target.files[0])} />
+            <div className="ra-drop-icon">⬆</div>
+            <div className="ra-drop-text">Upload .txt or .md resume</div>
           </div>
 
           <textarea
@@ -507,286 +344,79 @@ export default function ResumeAnalyzer() {
             onChange={(e) => setResume(e.target.value)}
           />
 
-          {error && (
-            <div
-              style={{
-                color: "#ff453a",
-                marginTop: 10,
-                fontSize: 13,
-              }}
-            >
-              {error}
-            </div>
-          )}
+          {error && <div className="ra-error-msg">{error}</div>}
 
-          <div
-            style={{
-              display: "flex",
-              gap: 10,
-              marginTop: 16,
-            }}
-          >
-            <button
-              className="btn-analyze"
-              onClick={analyzeResume}
-              disabled={loading}
-            >
-              {loading
-                ? "ANALYZING..."
-                : "ANALYZE RESUME →"}
+          <div className="ra-btn-row">
+            <button className="btn-analyze" onClick={analyzeResume} disabled={loading}>
+              {loading ? "ANALYZING..." : "ANALYZE RESUME →"}
             </button>
-
-            <button
-              style={{
-                padding: "16px 20px",
-                background: "transparent",
-                border: "1px solid #1e2247",
-                borderRadius: 12,
-                color: "#7f88b2",
-                cursor: "pointer",
-              }}
-              onClick={() => setResume(SAMPLE_RESUME)}
-            >
-              Sample
-            </button>
+            <button className="ra-sample-btn" onClick={() => setResume(SAMPLE_RESUME)}>Sample</button>
           </div>
         </div>
 
         {result && (
           <div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr",
-                gap: 12,
-                marginBottom: 18,
-              }}
-            >
+            <div className="ra-score-grid">
               {[
-                {
-                  label: "OVERALL",
-                  score: result.overallScore,
-                },
-                {
-                  label: "JOB FIT",
-                  score: result.fitScore,
-                },
-                {
-                  label: "ATS",
-                  score: result.atsScore,
-                },
+                { label: "OVERALL", score: result.overallScore },
+                { label: "JOB FIT", score: result.fitScore },
+                { label: "ATS", score: result.atsScore },
               ].map(({ label, score }) => (
-                <div
-                  key={label}
-                  className="card"
-                  style={{ textAlign: "center" }}
-                >
+                <div key={label} className="card ra-score-card">
                   <CircleScore score={score} size={90} />
-
-                  <div
-                    style={{
-                      marginTop: 10,
-                      fontSize: 11,
-                      color: "#697298",
-                    }}
-                  >
-                    {label}
-                  </div>
+                  <div className="ra-score-label">{label}</div>
                 </div>
               ))}
             </div>
 
-            <div className="card" style={{ marginBottom: 18 }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: 14,
-                }}
-              >
+            <div className="card ra-assessment-card">
+              <div className="ra-assessment">
                 <div>Assessment</div>
-
-                <div style={{ color: "#00ff9d" }}>
-                  {result.level}
-                </div>
+                <div className="ra-assessment-level">{result.level}</div>
               </div>
-
-              <p
-                style={{
-                  color: "#bfc7e8",
-                  lineHeight: 1.7,
-                }}
-              >
-                {result.verdict}
-              </p>
-
-              <div
-                style={{
-                  marginTop: 18,
-                  paddingTop: 18,
-                  borderTop: "1px solid #1e2247",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 12,
-                    color: "#697298",
-                  }}
-                >
-                  EST. SALARY RANGE
-                </div>
-
-                <div
-                  style={{
-                    marginTop: 8,
-                    fontSize: 22,
-                    fontWeight: 700,
-                    color: "#00ff9d",
-                  }}
-                >
-                  ₹{result.salaryRange.low}L – ₹
-                  {result.salaryRange.high}L
-                </div>
+              <p className="ra-verdict">{result.verdict}</p>
+              <div className="ra-salary-section">
+                <div className="ra-salary-label">EST. SALARY RANGE</div>
+                <div className="ra-salary-value">₹{result.salaryRange.low}L – ₹{result.salaryRange.high}L</div>
               </div>
             </div>
 
-            <div className="card" style={{ marginBottom: 18 }}>
-              <div
-                style={{
-                  marginBottom: 16,
-                  color: "#697298",
-                  fontSize: 12,
-                }}
-              >
-                SECTION BREAKDOWN
-              </div>
-
-              {Object.entries(result.sections).map(
-                ([key, val]) => (
-                  <div key={key} style={{ marginBottom: 16 }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <div
-                        style={{
-                          textTransform: "capitalize",
-                        }}
-                      >
-                        {key}
-                      </div>
-
-                      <div
-                        style={{
-                          color: scoreColor(val.score),
-                        }}
-                      >
-                        {val.score}/10
-                      </div>
-                    </div>
-
-                    <div className="bar">
-                      <div
-                        className="bar-fill"
-                        style={{
-                          width: `${val.score * 10}%`,
-                          background: scoreColor(val.score),
-                        }}
-                      />
-                    </div>
-
-                    <div
-                      style={{
-                        marginTop: 6,
-                        fontSize: 12,
-                        color: "#7f88b2",
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      {val.feedback}
-                    </div>
+            <div className="card ra-section-card">
+              <div className="ra-section-header">SECTION BREAKDOWN</div>
+              {Object.entries(result.sections).map(([key, val]) => (
+                <div key={key} className="ra-section-row">
+                  <div className="ra-section-top">
+                    <div className="ra-section-name">{key}</div>
+                    <div className="ra-section-score" style={{ color: scoreColor(val.score) }}>{val.score}/10</div>
                   </div>
-                )
-              )}
+                  <div className="bar">
+                    <div className="bar-fill" style={{ width: `${val.score * 10}%`, background: scoreColor(val.score) }} />
+                  </div>
+                  <div className="ra-section-feedback">{val.feedback}</div>
+                </div>
+              ))}
             </div>
 
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 12,
-                marginBottom: 18,
-              }}
-            >
+            <div className="ra-split-grid">
               <div className="card">
-                <div
-                  style={{
-                    marginBottom: 12,
-                    color: "#697298",
-                    fontSize: 12,
-                  }}
-                >
-                  STRENGTHS
-                </div>
-
+                <div className="ra-list-title">STRENGTHS</div>
                 {result.strengths.map((s, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      marginBottom: 8,
-                      color: "#cfd6f2",
-                      fontSize: 13,
-                    }}
-                  >
-                    ✓ {s}
-                  </div>
+                  <div key={i} className="ra-list-item">✓ {s}</div>
                 ))}
               </div>
-
               <div className="card">
-                <div
-                  style={{
-                    marginBottom: 12,
-                    color: "#697298",
-                    fontSize: 12,
-                  }}
-                >
-                  IMPROVEMENTS
-                </div>
-
+                <div className="ra-list-title">IMPROVEMENTS</div>
                 {result.improvements.map((s, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      marginBottom: 8,
-                      color: "#cfd6f2",
-                      fontSize: 13,
-                    }}
-                  >
-                    ! {s}
-                  </div>
+                  <div key={i} className="ra-list-item">! {s}</div>
                 ))}
               </div>
             </div>
 
             <div className="card">
-              <div
-                style={{
-                  marginBottom: 12,
-                  color: "#697298",
-                  fontSize: 12,
-                }}
-              >
-                MISSING KEYWORDS
-              </div>
-
+              <div className="ra-list-title">MISSING KEYWORDS</div>
               <div>
                 {result.missingKeywords.map((k) => (
-                  <span key={k} className="tag">
-                    {k}
-                  </span>
+                  <span key={k} className="tag">{k}</span>
                 ))}
               </div>
             </div>

@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+.af-container {
+  min-height: 100vh;
+  background: linear-gradient(145deg, #020818 0%, #040d20 35%, #060f1c 60%, #030a14 100%);
+  color: #e0e0f0;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+.af-header {
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(24px);
+  position: sticky;
+  top: 0;
+  background: rgba(13,11,34,0.82);
+  border-bottom: 1px solid rgba(99,102,241,0.13);
+  z-index: 20;
+}
+
+.af-header-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.af-logo-dot {
+  width: 8px;
+  height: 8px;
+  background: #f59e0b;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+.af-brand {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+.af-highlight {
+  color: #f59e0b;
+}
+
+.af-separator {
+  color: rgba(99,102,241,0.3);
+  margin: 0 6px;
+}
+
+.af-activation-label {
+  font-size: 11px;
+  color: #a5b4fc;
+  letter-spacing: 0.1em;
+}
+
+.af-header-right {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.af-dashboard-btn {
+  padding: 6px 12px;
+  font-size: 11px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  color: #8890b0;
+  cursor: pointer;
+}
+
+.af-header-spacer {
+  flex: 1;
+}
+
+.af-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.af-title-section {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.af-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.af-subtitle {
+  color: #697298;
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.af-progress-card {
+  background: rgba(255,255,255,0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.af-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.af-progress-label {
+  font-size: 12px;
+  color: #697298;
+  letter-spacing: 0.06em;
+}
+
+.af-progress-stats {
+  font-size: 13px;
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.af-progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.af-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(.4,0,.2,1);
+}
+
+.af-loading {
+  text-align: center;
+  padding: 40px;
+  color: #697298;
+}
+
+.af-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s;
+}
+
+.step-card:hover {
+  border-color: rgba(245,158,11,0.3);
+  background: rgba(245,158,11,0.04);
+}
+
+.step-card.done {
+  border-color: rgba(16,185,129,0.25);
+  background: rgba(16,185,129,0.05);
+  opacity: 0.7;
+}
+
+.btn-act {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  background: linear-gradient(135deg,#f59e0b,#d97706);
+  color: #fff;
+  border: none;
+}
+
+.af-step-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.af-step-content {
+  flex: 1;
+}
+
+.af-step-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.af-step-icon-emoji {
+  font-size: 16px;
+}
+
+.af-step-label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.af-step-done-badge {
+  font-size: 10px;
+  color: #10b981;
+  background: rgba(16,185,129,0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.af-step-desc {
+  font-size: 12px;
+  color: #697298;
+}
+
+.af-step-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.af-step-points {
+  font-size: 10px;
+  color: #4a5070;
+  margin-bottom: 4px;
+}
+
+.af-step-badge {
+  font-size: 10px;
+  color: #10b981;
+  background: rgba(16,185,129,0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+}

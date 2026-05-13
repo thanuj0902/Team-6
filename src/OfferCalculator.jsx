@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import './OfferCalculator.css'
 
 const ROLES = ["Software Engineer", "Senior Engineer", "Staff Engineer", "Principal Engineer", "Engineering Manager", "Director of Engineering", "VP Engineering", "Product Manager", "Senior PM", "Data Scientist", "ML Engineer", "Designer", "DevOps / SRE", "QA Engineer"];
 const SKILLS = ["React", "Node.js", "Python", "Java", "Go", "Kubernetes", "AWS/GCP", "PostgreSQL", "Machine Learning", "System Design", "Leadership", "Product Sense"];
@@ -182,98 +183,70 @@ export default function OfferCalculator() {
   ];
 
   return (
-    <div style={{ minHeight: "100vh", background: "linear-gradient(145deg,#1a1a1a 0%,#2d2d2d 35%,#1a1a1a 65%,#0a0a0a 100%)", color: "#e2e2f0", fontFamily: "'Inter','DM Sans',sans-serif" }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
-        *{box-sizing:border-box;margin:0;padding:0;}
-        .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
-        .mode-card{display:flex;align-items:center;gap:18px;padding:22px 24px;background:rgba(255,255,255,0.035);border:1.5px solid rgba(255,255,255,0.07);border-radius:18px;cursor:pointer;transition:all 0.22s;text-align:left;width:100%;font-family:inherit;}
-        .mode-card:hover{background:rgba(99,102,241,0.1);border-color:rgba(99,102,241,0.45);transform:translateY(-3px);box-shadow:0 12px 40px rgba(99,102,241,0.18);}
-        .chip{display:inline-flex;align-items:center;padding:9px 17px;border-radius:9px;border:1.5px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);cursor:pointer;transition:all 0.18s;font-size:13px;font-family:inherit;color:#8890b0;}
-        .chip:hover{border-color:rgba(99,102,241,0.5);color:#c8d0f0;background:rgba(99,102,241,0.08);}
-        .chip.on{border-color:#6366f1;background:rgba(99,102,241,0.18);color:#a5b4fc;font-weight:600;}
-        .inp{width:100%;padding:14px 18px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.09);border-radius:12px;color:#e8e8f0;font-size:15px;font-family:inherit;outline:none;transition:all 0.2s;}
-        .inp:focus{border-color:#6366f1;background:rgba(99,102,241,0.07);box-shadow:0 0 0 3px rgba(99,102,241,0.12);}
-        .textarea{width:100%;min-height:210px;padding:16px 18px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.09);border-radius:14px;color:#e8e8f0;font-size:13px;font-family:'DM Mono','Fira Code',monospace;outline:none;resize:vertical;line-height:1.75;transition:all 0.2s;}
-        .btn{padding:14px 28px;border-radius:13px;font-size:14px;font-family:inherit;cursor:pointer;font-weight:600;letter-spacing:0.03em;transition:all 0.2s;border:none;}
-        .btn-p{background:linear-gradient(135deg,#6366f1 0%,#4f46e5 50%,#3b82f6 100%);color:#fff;box-shadow:0 4px 24px rgba(99,102,241,0.4);}
-        .btn-p:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 36px rgba(99,102,241,0.6);}
-        .btn-g{background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1)!important;color:#6b7094;}
-        .glass{background:rgba(255,255,255,0.035);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:18px;}
-        .bar-track{width:100%;height:7px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;}
-        .bar-fill{height:100%;border-radius:4px;transition:width 1.1s cubic-bezier(.4,0,.2,1);}
-        .fin{animation:fin 0.28s ease forwards;}
-        @keyframes fin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-        .spin{animation:sp 1s linear infinite;display:inline-block;}
-        @keyframes sp{to{transform:rotate(360deg)}}
-        .scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#6366f1,transparent);animation:scan 1.8s linear infinite;}
-        @keyframes scan{from{top:0}to{top:100%}}
-        .drop{border:2px dashed rgba(99,102,241,0.25);border-radius:16px;padding:36px 24px;text-align:center;cursor:pointer;transition:all 0.2s;background:rgba(99,102,241,0.02);}
-        .drop:hover,.drop.over{border-color:rgba(99,102,241,0.6);background:rgba(99,102,241,0.07);}
-      `}</style>
+    <div className="oc-wrapper">
 
-      <header style={{ width:"100%",padding:"18px 32px",display:"flex",alignItems:"center",backdropFilter:"blur(24px)",position:"sticky",top:0,background:"rgba(13,11,34,0.82)",borderBottom:"1px solid rgba(99,102,241,0.13)",zIndex:20 }}>
-        <div style={{ flex:1,display:"flex",alignItems:"center",gap:14 }}>
-          <div style={{ width:9,height:9,background:"linear-gradient(135deg,#6366f1,#3b82f6)",borderRadius:"50%",boxShadow:"0 0 12px #6366f1aa" }}/>
-          <span style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:16,letterSpacing:"0.1em",color:"#fff" }}>TALENT<span style={{ color:"#6366f1" }}>DASH</span></span>
-          <span style={{ color:"rgba(99,102,241,0.3)",margin:"0 6px" }}>·</span>
-          <span style={{ fontSize:11,color:"#a5b4fc",letterSpacing:"0.1em" }}>OFFER INTELLIGENCE</span>
+      <header className="oc-header">
+        <div className="oc-header-left">
+          <div className="oc-logo-dot"/>
+          <span className="oc-logo">TALENT<span className="oc-logo-accent">DASH</span></span>
+          <span className="oc-sep">·</span>
+          <span className="oc-badge">OFFER INTELLIGENCE</span>
         </div>
-        <div style={{ display:"flex",gap:6,alignItems:"center" }}>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Dashboard</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Salary</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'resume'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Resume</button>
+        <div className="oc-header-nav">
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} className="oc-header-btn">Dashboard</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} className="oc-header-btn">Salary</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'resume'}))} className="oc-header-btn">Resume</button>
         </div>
-        <div style={{ flex:1,display:"flex",justifyContent:"flex-end",alignItems:"center",gap:6 }}>
+        <div className="oc-header-right">
           {mode !== "landing" && (
-            <button onClick={reset} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>← Back</button>
+            <button onClick={reset} className="oc-header-btn">← Back</button>
           )}
         </div>
       </header>
 
-      <div style={{ width:"100%",maxWidth:660,margin:"0 auto",padding:"0 20px 80px",position:"relative",zIndex:1 }}>
+      <div className="oc-container">
         {mode === "landing" && (
           <div className="fin">
-            <div style={{ padding:"52px 0 40px",textAlign:"center" }}>
-              <div style={{ display:"inline-flex",alignItems:"center",gap:8,padding:"6px 18px",borderRadius:20,border:"1px solid rgba(99,102,241,0.3)",fontSize:11,color:"#7c7fff",letterSpacing:"0.1em",marginBottom:22,background:"rgba(99,102,241,0.08)" }}>
-                <div style={{ width:6,height:6,borderRadius:"50%",background:"#6366f1",boxShadow:"0 0 8px #6366f1" }}/>
+            <div className="oc-hero">
+              <div className="oc-hero-badge">
+                <div className="oc-hero-dot"/>
                 AI-POWERED OFFER EVALUATION
               </div>
-              <h1 style={{ fontFamily:"'Syne',sans-serif",fontSize:46,fontWeight:800,lineHeight:1.1,color:"#fff",marginBottom:16 }}>
+              <h1 className="oc-hero-title">
                 Offer Evaluation
               </h1>
-              <p style={{ color:"#c8d0f0",fontSize:15,lineHeight:1.75,maxWidth:420,margin:"0 auto 0" }}>
-                Your offer, decoded — benchmarked against real market salaries from <strong style={{ color:"#fff" }}>4Cr+ data points.</strong>
+              <p className="oc-hero-sub">
+                Your offer, decoded — benchmarked against real market salaries from <strong>4Cr+ data points.</strong>
               </p>
             </div>
-            <p style={{ fontSize:13,color:"#c8d0f0",marginBottom:14,letterSpacing:"0.02em" }}>How would you like to provide your offer details?</p>
-            <div style={{ display:"flex",flexDirection:"column",gap:12,marginBottom:32 }}>
+            <p className="oc-prompt">How would you like to provide your offer details?</p>
+            <div className="oc-mode-list">
               {[
                 { icon: "⬆️", iconBg: "linear-gradient(135deg,rgba(99,102,241,0.3),rgba(59,130,246,0.3))", title: "Upload Offer Letter", sub: "Extract details automatically", action: () => fileRef.current?.click() },
                 { icon: "📋", iconBg: "linear-gradient(135deg,rgba(16,185,129,0.25),rgba(6,182,212,0.25))", title: "Paste Offer Text", sub: "Copy and paste the text", action: () => setMode("paste") },
                 { icon: "✏️", iconBg: "linear-gradient(135deg,rgba(245,158,11,0.25),rgba(249,115,22,0.25))", title: "Enter Manually", sub: "Fill details field by field", action: () => setMode("manual") },
               ].map((m, i) => (
                 <button key={i} className="mode-card" onClick={m.action}>
-                  <div style={{ width:50,height:50,borderRadius:13,background:m.iconBg,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,flexShrink:0 }}>{m.icon}</div>
-                  <div style={{ flex:1 }}>
-                    <div style={{ fontWeight:600,fontSize:15,color:"#dde0f5",marginBottom:5 }}>{m.title}</div>
-                    <div style={{ fontSize:12,color:"#a5b4fc",lineHeight:1.55 }}>{m.sub}</div>
+                  <div className="oc-mode-icon-box" style={{ background: m.iconBg }}>{m.icon}</div>
+                  <div className="flex-1">
+                    <div className="oc-mode-title">{m.title}</div>
+                    <div className="oc-mode-sub">{m.sub}</div>
                   </div>
                   <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="#6366f1" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
               ))}
             </div>
-            <input ref={fileRef} type="file" accept=".txt,.pdf,.doc" style={{ display:"none" }} onChange={e => readFile(e.target.files[0])} />
-            <div style={{ display:"flex",alignItems:"center",justifyContent:"center",gap:8,marginBottom:36 }}>
-              <div style={{ width:7,height:7,borderRadius:"50%",background:"#10b981",boxShadow:"0 0 7px #10b981" }}/>
-              <span style={{ fontSize:12,color:"#a5b4fc" }}>Powered by AI · trained on 4Cr+ salary data points</span>
+            <input ref={fileRef} type="file" accept=".txt,.pdf,.doc" className="oc-file-input" onChange={e => readFile(e.target.files[0])} />
+            <div className="oc-powered">
+              <div className="oc-powered-dot"/>
+              <span className="oc-powered-text">Powered by AI · trained on 4Cr+ salary data points</span>
             </div>
-            <div style={{ height:1,background:"linear-gradient(90deg,transparent,rgba(99,102,241,0.2),transparent)",marginBottom:32 }}/>
-            <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:8 }}>
+            <div className="oc-divider"/>
+            <div className="oc-stats-grid">
               {STATS.map(s => (
-                <div key={s.val} style={{ textAlign:"center",padding:"16px 8px",background:"rgba(255,255,255,0.025)",borderRadius:14,border:"1px solid rgba(255,255,255,0.06)" }}>
-                  <div style={{ fontFamily:"'Syne',sans-serif",fontSize:30,fontWeight:800,background:"linear-gradient(135deg,#818cf8,#60a5fa)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent" }}>{s.val}</div>
-                  <div style={{ fontSize:11,color:"#a5b4fc",marginTop:6,lineHeight:1.5,whiteSpace:"pre-line" }}>{s.sub}</div>
+                <div key={s.val} className="oc-stat-card">
+                  <div className="oc-stat-val">{s.val}</div>
+                  <div className="oc-stat-sub">{s.sub}</div>
                 </div>
               ))}
             </div>
@@ -281,55 +254,59 @@ export default function OfferCalculator() {
         )}
 
         {mode === "paste" && (
-          <div className="fin" style={{ paddingTop:44 }}>
-            <div style={{ fontSize:11,color:"#6366f1",letterSpacing:"0.12em",marginBottom:8 }}>PROVIDE OFFER TEXT</div>
-            <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:30,fontWeight:700,color:"#fff",marginBottom:8 }}>Paste Offer Letter</h2>
-            <div className={`drop${dragOver ? " over" : ""}`} style={{ marginBottom:16 }}
+          <div className="fin oc-paste-section">
+            <div className="oc-paste-label">PROVIDE OFFER TEXT</div>
+            <h2 className="oc-paste-title">Paste Offer Letter</h2>
+            <div className={`drop${dragOver ? " over" : ""} mb-4`}
               onDragOver={e => { e.preventDefault(); setDragOver(true); }}
               onDragLeave={() => setDragOver(false)}
               onDrop={e => { e.preventDefault(); setDragOver(false); readFile(e.dataTransfer.files[0]); }}
               onClick={() => fileRef.current?.click()}
             >
-              <div style={{ fontSize:32,marginBottom:8 }}>📂</div>
-              <div style={{ fontSize:13,color:"#c8d0f0" }}>Drop your offer letter file here or <span style={{ color:"#6366f1",fontWeight:500 }}>browse</span></div>
+              <div className="text-[32px] mb-2">📂</div>
+              <div className="text-[13px] text-[#c8d0f0]">Drop your offer letter file here or <span className="text-[#6366f1] font-medium">browse</span></div>
             </div>
             <textarea className="textarea" placeholder="Paste your full offer letter text here..." value={pasteText} onChange={e => setPasteText(e.target.value)} />
-            {aiError && <div style={{ color:"#ef4444",fontSize:12,marginTop:10,padding:"10px 14px",background:"rgba(239,68,68,0.08)",borderRadius:8,border:"1px solid rgba(239,68,68,0.2)" }}>{aiError}</div>}
-            <div style={{ display:"flex",gap:10,marginTop:16 }}>
+            {aiError && <div className="oc-error-msg">{aiError}</div>}
+            <div className="oc-btn-row">
               <button className="btn btn-g" onClick={() => setMode("landing")}>← Back</button>
-              <button className="btn btn-p" style={{ flex:1 }} disabled={!pasteText.trim()} onClick={() => parseAndAnalyse(pasteText)}>Analyse with AI →</button>
+              <button className="btn btn-p flex-1" disabled={!pasteText.trim()} onClick={() => parseAndAnalyse(pasteText)}>Analyse with AI →</button>
             </div>
           </div>
         )}
 
         {mode === "manual" && (
-          <div style={{ paddingTop:44 }}>
-            <div style={{ display:"flex",alignItems:"center",marginBottom:40 }}>
+          <div className="oc-manual-section">
+            <div className="oc-step-row">
               {["Role & Exp", "Location", "Compensation"].map((label, i) => {
                 const n = i + 1; const done = mStep > n; const active = mStep === n;
                 return (
-                  <div key={n} style={{ display:"flex",alignItems:"center",flex:i < 2 ? 1 : "auto" }}>
-                    <div style={{ display:"flex",alignItems:"center",gap:9 }}>
-                      <div className="sdot" style={{ background: done ? "linear-gradient(135deg,#6366f1,#3b82f6)" : active ? "rgba(99,102,241,0.2)" : "rgba(255,255,255,0.05)", color: done ? "#fff" : active ? "#a5b4fc" : "#8890b0", border: active ? "2px solid #6366f1" : done ? "2px solid #6366f1" : "2px solid rgba(255,255,255,0.07)" }}>{done ? "✓" : n}</div>
-                      <span style={{ fontSize:11,color:active?"#a5b4fc":done?"#6366f1":"#8890b0",letterSpacing:"0.06em",fontWeight:active?600:400 }}>{label}</span>
+                  <div key={n} className={i < 2 ? "oc-step-item-flex" : "oc-step-item"}>
+                    <div className="oc-step-dot-wrap">
+                      <div className="sdot" style={{
+                        background: done ? "linear-gradient(135deg,#6366f1,#3b82f6)" : active ? "rgba(99,102,241,0.2)" : "rgba(255,255,255,0.05)",
+                        color: done ? "#fff" : active ? "#a5b4fc" : "#8890b0",
+                        border: active ? "2px solid #6366f1" : done ? "2px solid #6366f1" : "2px solid rgba(255,255,255,0.07)"
+                      }}>{done ? "✓" : n}</div>
+                      <span className={`oc-step-label ${active ? 'oc-step-label-active' : done ? 'oc-step-label-done' : 'oc-step-label-pending'}`}>{label}</span>
                     </div>
-                    {i < 2 && <div style={{ flex:1,height:1,background:done?"rgba(99,102,241,0.5)":"rgba(255,255,255,0.06)",margin:"0 14px" }}/>}
+                    {i < 2 && <div className={`oc-step-line ${done ? 'oc-step-line-done' : 'oc-step-line-pending'}`}/>}
                   </div>
                 );
               })}
             </div>
             {mStep === 1 && (
               <div className={animIn ? "fin" : ""}>
-                <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:26,fontWeight:700,color:"#fff",marginBottom:28 }}>Role & Experience</h2>
-                <div style={{ marginBottom:26 }}>
-                  <div style={{ fontSize:10,color:"#8890b0",letterSpacing:"0.14em",marginBottom:12 }}>JOB ROLE</div>
-                  <div style={{ display:"flex",flexWrap:"wrap",gap:8 }}>{ROLES.map(r => <button key={r} className={`chip${role===r?" on":""}`} onClick={() => setRole(r)}>{r}</button>)}</div>
+                <h2 className="oc-manual-title">Role & Experience</h2>
+                <div className="oc-field-group">
+                  <div className="oc-field-label">JOB ROLE</div>
+                  <div className="oc-chip-row">{ROLES.map(r => <button key={r} className={`chip${role===r?" on":""}`} onClick={() => setRole(r)}>{r}</button>)}</div>
                 </div>
-                <div style={{ marginBottom:32 }}>
-                  <div style={{ fontSize:10,color:"#8890b0",letterSpacing:"0.14em",marginBottom:12 }}>YEARS OF EXPERIENCE</div>
-                  <div style={{ display:"flex",flexWrap:"wrap",gap:8 }}>{EXP_LEVELS.map(e => <button key={e} className={`chip${exp===e?" on":""}`} onClick={() => setExp(e)}>{e}</button>)}</div>
+                <div className="oc-field-group-last">
+                  <div className="oc-field-label">YEARS OF EXPERIENCE</div>
+                  <div className="oc-chip-row">{EXP_LEVELS.map(e => <button key={e} className={`chip${exp===e?" on":""}`} onClick={() => setExp(e)}>{e}</button>)}</div>
                 </div>
-                <div style={{ display:"flex",gap:10 }}>
+                <div className="flex gap-[10px]">
                   <button className="btn btn-g" onClick={() => setMode("landing")}>← Back</button>
                   <button className="btn btn-p" onClick={() => goMStep(2)}>Continue →</button>
                 </div>
@@ -337,16 +314,16 @@ export default function OfferCalculator() {
             )}
             {mStep === 2 && (
               <div className={animIn ? "fin" : ""}>
-                <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:26,fontWeight:700,color:"#fff",marginBottom:28 }}>Location & Company</h2>
-                <div style={{ marginBottom:26 }}>
-                  <div style={{ fontSize:10,color:"#8890b0",letterSpacing:"0.14em",marginBottom:12 }}>CITY</div>
-                  <div style={{ display:"flex",flexWrap:"wrap",gap:8 }}>{CITIES.map(c => <button key={c} className={`chip${city===c?" on":""}`} onClick={() => setCity(c)}>{c}</button>)}</div>
+                <h2 className="oc-manual-title">Location & Company</h2>
+                <div className="oc-field-group">
+                  <div className="oc-field-label">CITY</div>
+                  <div className="oc-chip-row">{CITIES.map(c => <button key={c} className={`chip${city===c?" on":""}`} onClick={() => setCity(c)}>{c}</button>)}</div>
                 </div>
-                <div style={{ marginBottom:32 }}>
-                  <div style={{ fontSize:10,color:"#8890b0",letterSpacing:"0.14em",marginBottom:12 }}>COMPANY</div>
-                  <div style={{ display:"flex",flexWrap:"wrap",gap:8 }}>{COMPANIES.map(c => <button key={c} className={`chip${company===c?" on":""}`} onClick={() => setCompany(c)}>{c}</button>)}</div>
+                <div className="oc-field-group-last">
+                  <div className="oc-field-label">COMPANY</div>
+                  <div className="oc-chip-row">{COMPANIES.map(c => <button key={c} className={`chip${company===c?" on":""}`} onClick={() => setCompany(c)}>{c}</button>)}</div>
                 </div>
-                <div style={{ display:"flex",gap:10 }}>
+                <div className="flex gap-[10px]">
                   <button className="btn btn-g" onClick={() => goMStep(1)}>← Back</button>
                   <button className="btn btn-p" onClick={() => goMStep(3)}>Continue →</button>
                 </div>
@@ -354,8 +331,8 @@ export default function OfferCalculator() {
             )}
             {mStep === 3 && (
               <div className={animIn ? "fin" : ""}>
-                <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:26,fontWeight:700,color:"#fff",marginBottom:28 }}>Compensation Details</h2>
-                <div style={{ display:"flex",flexDirection:"column",gap:14,marginBottom:20 }}>
+                <h2 className="oc-manual-title">Compensation Details</h2>
+                <div className="oc-comp-form">
                   {[
                     { label:"BASE SALARY", val:base, set:setBase, hint:"e.g. 2000000" },
                     { label:"PERF BONUS", val:bonus, set:setBonus, hint:"e.g. 400000" },
@@ -363,14 +340,14 @@ export default function OfferCalculator() {
                     { label:"JOINING BONUS", val:joining, set:setJoining, hint:"e.g. 500000" },
                   ].map(({ label, val, set, hint }) => (
                     <div key={label}>
-                      <label style={{ fontSize:10,color:"#8890b0",letterSpacing:"0.12em",display:"block",marginBottom:7 }}>{label}</label>
+                      <label className="oc-comp-label">{label}</label>
                       <input className="inp" type="number" placeholder={hint} value={val} onChange={e => set(e.target.value)} />
                     </div>
                   ))}
                 </div>
-                <div style={{ display:"flex",gap:10 }}>
+                <div className="flex gap-[10px]">
                   <button className="btn btn-g" onClick={() => goMStep(2)}>← Back</button>
-                  <button className="btn btn-p" style={{ flex:1 }} disabled={!base} onClick={() => { setMode("result"); logActivity('evaluated_offer', { role, company, city }); }}>Analyse Offer →</button>
+                  <button className="btn btn-p flex-1" disabled={!base} onClick={() => { setMode("result"); logActivity('evaluated_offer', { role, company, city }); }}>Analyse Offer →</button>
                 </div>
               </div>
             )}
@@ -378,16 +355,16 @@ export default function OfferCalculator() {
         )}
 
         {mode === "loading" && (
-          <div className="fin" style={{ paddingTop:80,textAlign:"center" }}>
-            <div className="glass" style={{ padding:"52px 32px",maxWidth:420,margin:"0 auto",position:"relative",overflow:"hidden" }}>
+          <div className="fin oc-loading-section">
+            <div className="glass oc-loading-card">
               <div className="scan-line" />
-              <div style={{ fontSize:52,marginBottom:20 }}>🔍</div>
-              <h3 style={{ fontFamily:"'Syne',sans-serif",fontSize:22,fontWeight:700,color:"#fff",marginBottom:10 }}>Analysing Your Offer</h3>
-              <div style={{ display:"flex",flexDirection:"column",gap:10 }}>
+              <div className="oc-loading-icon">🔍</div>
+              <h3 className="oc-loading-title">Analysing Your Offer</h3>
+              <div className="oc-loading-list">
                 {["Extracting compensation", "Benchmarking market data", "Generating report"].map((s, i) => (
-                  <div key={s} style={{ display:"flex",alignItems:"center",gap:12,padding:"11px 16px",background:"rgba(99,102,241,0.07)",borderRadius:10,animation:`fin 0.3s ease ${i*0.15}s both` }}>
-                    <span className="spin" style={{ fontSize:15,color:"#6366f1" }}>⟳</span>
-                    <span style={{ fontSize:12,color:"#8890b0" }}>{s}</span>
+                  <div key={s} className="oc-loading-item-stagger" style={{ animationDelay: `${i*0.15}s` }}>
+                    <span className="spin oc-loading-spin">⟳</span>
+                    <span className="oc-loading-text">{s}</span>
                   </div>
                 ))}
               </div>
@@ -396,31 +373,31 @@ export default function OfferCalculator() {
         )}
 
         {mode === "result" && (
-          <div className="fin" style={{ paddingTop:44 }}>
-            <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:24 }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <div style={{ fontSize:11,color:"#6366f1",letterSpacing:"0.12em",marginBottom:4 }}>OFFER ANALYSIS COMPLETE</div>
-                <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:28,fontWeight:800,color:"#fff", marginBottom: 0 }}>Your Offer Report</h2>
+          <div className="fin oc-result-section">
+            <div className="oc-result-header">
+              <div className="oc-result-header-left">
+                <div className="oc-result-label">OFFER ANALYSIS COMPLETE</div>
+                <h2 className="oc-result-title">Your Offer Report</h2>
               </div>
-              <div style={{ textAlign:"right",padding:"10px 14px",background:"rgba(255,255,255,0.04)",borderRadius:10,border:"1px solid rgba(255,255,255,0.07)" }}>
-                <div style={{ fontSize:13,color:"#a5b4fc",fontWeight:600 }}>{role}</div>
-                <div style={{ fontSize:11,color:"#8890b0" }}>{city} · {exp}</div>
+              <div className="oc-result-summary">
+                <div className="oc-result-role">{role}</div>
+                <div className="oc-result-meta">{city} · {exp}</div>
               </div>
             </div>
 
-            <div style={{ padding:"28px",border:`1.5px solid ${verdict.color}35`,borderRadius:20,background:verdict.grad,marginBottom:18,position:"relative",overflow:"hidden" }}>
-              <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:14 }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                  <div style={{ fontSize:10,color:verdict.color,letterSpacing:"0.14em",marginBottom:6,fontWeight:600 }}>VERDICT</div>
-                  <div style={{ fontFamily:"'Syne',sans-serif",fontSize:36,fontWeight:800,color:verdict.color,lineHeight:1 }}>{verdict.label}</div>
+            <div className="oc-verdict-card" style={{ border: `1.5px solid ${verdict.color}35`, background: verdict.grad }}>
+              <div className="oc-verdict-top">
+                <div className="oc-verdict-left">
+                  <div className="oc-verdict-tag" style={{ color: verdict.color }}>VERDICT</div>
+                  <div className="oc-verdict-label" style={{ color: verdict.color }}>{verdict.label}</div>
                 </div>
-                <div style={{ textAlign:"right" }}>
-                  <div style={{ fontSize:10,color:"rgba(255,255,255,0.35)",marginBottom:4 }}>YOUR CTC</div>
-                  <div style={{ fontFamily:"'Syne',sans-serif",fontSize:30,fontWeight:700,color:"#fff" }}>{fmtL(totalCTC)}</div>
+                <div className="text-right">
+                  <div className="oc-verdict-ctc-label">YOUR CTC</div>
+                  <div className="oc-verdict-ctc-value">{fmtL(totalCTC)}</div>
                 </div>
               </div>
-              <p style={{ fontSize:13,color:"rgba(255,255,255,0.55)",lineHeight:1.65,marginBottom:18 }}>{verdict.desc}</p>
-              <div style={{ display:"flex",gap:28,paddingTop:16,borderTop:`1px solid ${verdict.color}20` }}>
+              <p className="oc-verdict-desc">{verdict.desc}</p>
+              <div className="oc-verdict-metrics" style={{ borderTopColor: `${verdict.color}20` }}>
                 {[
                   { label:"MARKET P50", val:fmtL(p50), color:"#fff" },
                   { label:"DIFFERENCE", val:(totalCTC>=p50?"+":"")+fmtL(totalCTC-p50), color:totalCTC>=p50?"#10b981":"#ef4444" },
@@ -428,15 +405,15 @@ export default function OfferCalculator() {
                   { label:"REAL VALUE", val:fmtL(adjCTC), color:"#6366f1" },
                 ].map(item => (
                   <div key={item.label}>
-                    <div style={{ fontSize:10,color:"rgba(255,255,255,0.3)",marginBottom:4 }}>{item.label}</div>
-                    <div style={{ fontSize:19,fontWeight:700,color:item.color }}>{item.val}</div>
+                    <div className="oc-metric-label">{item.label}</div>
+                    <div className="oc-metric-value" style={{ color: item.color }}>{item.val}</div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div style={{ padding:"24px",background:"rgba(255,255,255,0.03)",backdropFilter:"blur(16px)",border:"1px solid rgba(99,102,241,0.1)",borderRadius:18,marginBottom:14 }}>
-              <div style={{ fontSize:10,color:"#8890b0",letterSpacing:"0.12em",marginBottom:18 }}>MARKET DISTRIBUTION</div>
+            <div className="oc-distribution-card">
+              <div className="oc-dist-title">MARKET DISTRIBUTION</div>
               {[
                 { label:"P25 (Entry)", val:p25, color:"#ef4444" },
                 { label:"P50 (Median)", val:p50, color:"#f59e0b" },
@@ -444,58 +421,32 @@ export default function OfferCalculator() {
                 { label:"P90 (Elite)", val:p90, color: "#6366f1" },
                 { label:"◆ YOUR OFFER", val:totalCTC,color:verdict.color,bold:true },
               ].map(({ label, val, color, bold }) => (
-                <div key={label} style={{ marginBottom:13 }}>
-                  <div style={{ display:"flex",justifyContent:"space-between",marginBottom:5 }}>
-                    <span style={{ fontSize:12,color:bold?"#e2e2f0":"#5a6080",fontWeight:bold?600:400 }}>{label}</span>
-                    <span style={{ fontSize:12,color,fontWeight:600 }}>{fmtL(val)}</span>
+                <div key={label} className="oc-dist-row">
+                  <div className="oc-dist-row-header">
+                    <span className={`oc-dist-label ${bold ? 'oc-dist-label-bold' : 'oc-dist-label-normal'}`}>{label}</span>
+                    <span className="oc-dist-amt" style={{ color }}>{fmtL(val)}</span>
                   </div>
                   <div className="bar-track"><div className="bar-fill" style={{ width:`${barPct(val)}%`,background:bold?`linear-gradient(90deg,${color},${color}99)`:color }}/></div>
                 </div>
               ))}
             </div>
 
-            <div style={{ display:"flex",gap:10,marginTop:4 }}>
-              <button className="btn btn-g" style={{ flex:1 }} onClick={reset}>← Start Over</button>
-              <button className="btn btn-p" style={{ flex:1 }} onClick={() => { setMode("manual"); setMStep(3); }}>Edit Details</button>
+            <div className="oc-result-actions">
+              <button className="btn btn-g flex-1" onClick={reset}>← Start Over</button>
+              <button className="btn btn-p flex-1" onClick={() => { setMode("manual"); setMStep(3); }}>Edit Details</button>
             </div>
 
-            {/* SMART GROWTH REDIRECT */}
-            <div style={{
-              marginTop: 24,
-              padding: '20px',
-              background: 'linear-gradient(135deg, rgba(168,85,247,0.1), rgba(0,0,0,0))',
-              border: '1px solid rgba(168,85,247,0.2)',
-              borderRadius: 14,
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: 12, color: '#a5b4fc', marginBottom: 12 }}>Offer below market? Let's fix your profile.</div>
-              <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
+            <div className="oc-growth-card">
+              <div className="oc-growth-text">Offer below market? Let's fix your profile.</div>
+              <div className="oc-growth-btns">
                 <button
                   onClick={() => window.dispatchEvent(new CustomEvent('changeTab', { detail: 'resume' }))}
-                  style={{
-                    background: '#a855f7',
-                    color: 'white',
-                    border: 'none',
-                    padding: '10px 20px',
-                    borderRadius: 8,
-                    fontSize: 12,
-                    fontWeight: 600,
-                    cursor: 'pointer'
-                  }}>
+                  className="oc-growth-btn-primary">
                   Improve Resume Score →
                 </button>
                 <button
                   onClick={() => window.dispatchEvent(new CustomEvent('changeTab', { detail: 'onboarding' }))}
-                  style={{
-                    background: 'rgba(255,255,255,0.05)',
-                    color: '#fff',
-                    border: '1px solid rgba(168,85,247,0.3)',
-                    padding: '10px 20px',
-                    borderRadius: 8,
-                    fontSize: 12,
-                    fontWeight: 600,
-                    cursor: 'pointer'
-                  }}>
+                  className="oc-growth-btn-secondary">
                   Save Analysis
                 </button>
               </div>

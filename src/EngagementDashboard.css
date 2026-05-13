@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.badge.earned {
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.2);
+  color: #6ee7b7;
+}
+
+.badge.locked {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #4a5070;
+  opacity: 0.6;
+}
+
+.ed-container {
+  min-height: 100vh;
+  background: linear-gradient(145deg, #020818 0%, #040d20 35%, #060f1c 60%, #030a14 100%);
+  color: #e0e0f0;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+.ed-header {
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(24px);
+  position: sticky;
+  top: 0;
+  background: rgba(13,11,34,0.82);
+  border-bottom: 1px solid rgba(99,102,241,0.13);
+  z-index: 20;
+}
+
+.ed-header-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ed-dot {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.ed-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+.ed-logo-accent {
+  color: #10b981;
+}
+
+.ed-sep {
+  color: rgba(99,102,241,0.3);
+  margin: 0 6px;
+}
+
+.ed-label {
+  font-size: 11px;
+  color: #a5b4fc;
+  letter-spacing: 0.1em;
+}
+
+.ed-header-right {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.ed-dashboard-btn {
+  padding: 6px 12px;
+  font-size: 11px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  color: #8890b0;
+  cursor: pointer;
+}
+
+.ed-header-spacer {
+  flex: 1;
+}
+
+.ed-main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.ed-signed-out {
+  text-align: center;
+  padding: 60px;
+}
+
+.ed-lock-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.ed-heading {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.ed-description {
+  color: #697298;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.ed-cta-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.ed-loading {
+  text-align: center;
+  padding: 40px;
+  color: #697298;
+}
+
+.ed-section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.ed-page-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.ed-page-title-accent {
+  color: #10b981;
+}
+
+.ed-page-subtitle {
+  color: #697298;
+  font-size: 13px;
+}
+
+.ed-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.ed-stat-card {
+  text-align: center;
+}
+
+.ed-stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.ed-stat-label {
+  font-size: 10px;
+  color: #697298;
+  margin-top: 4px;
+}
+
+.ed-achievements-card {
+  margin-bottom: 24px;
+}
+
+.ed-section-label {
+  font-size: 11px;
+  color: #697298;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+
+.ed-badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ed-badge-name {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.ed-badge-desc {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.ed-empty-activity {
+  text-align: center;
+  padding: 30px;
+  color: #4a5070;
+  font-size: 13px;
+}
+
+.ed-activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ed-activity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.ed-activity-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ed-activity-emoji {
+  font-size: 16px;
+}
+
+.ed-activity-action {
+  font-size: 13px;
+  color: #c8d0e8;
+}
+
+.ed-activity-date {
+  font-size: 10px;
+  color: #4a5070;
+}
