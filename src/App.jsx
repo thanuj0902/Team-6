@@ -27,12 +27,10 @@ function App() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#0f0c29',
+      background: '#020818',
       color: 'white',
       fontFamily: 'sans-serif'
     }}>
-
-
       <main style={{ padding: '20px' }}>
         {tabs[activeTab].component}
       </main>
