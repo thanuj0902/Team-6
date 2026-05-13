@@ -63,20 +63,15 @@ const ToolsHub = ({ onSelectTool }) => {
 
   return (
     <div className="th-container">
-      <header className="th-header">
+      <div className="th-header">
         <div className="th-header-left">
           <div className="th-dot"/>
           <span className="th-brand">TALENT<span className="th-brand-accent">DASH</span></span>
           <span className="th-separator">·</span>
           <span className="th-subtitle">GROWTH SUITE</span>
         </div>
-        <div className="th-header-nav">
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'offer'}))} className="th-header-btn">Offer</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} className="th-header-btn">Salary</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'resume'}))} className="th-header-btn">Resume</button>
-        </div>
         <div className="th-header-spacer"/>
-      </header>
+      </div>
       <div className="th-content">
 
       <div className="th-container-inner">
