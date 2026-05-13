@@ -16,9 +16,13 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  salaryPoints  SalaryPoint[]
-  resumeScores  ResumeScore[]
-  offerAnalyses OfferAnalysis[]
+  salaryPoints       SalaryPoint[]
+  resumeScores       ResumeScore[]
+  offerAnalyses      OfferAnalysis[]
+  activationSteps    ActivationStep[]
+  contributions      Contribution[]
+  activities         UserActivity[]
+  streak             Streak?
 }
 
 model SalaryPoint {
@@ -77,4 +81,64 @@ model OfferAnalysis {
   createdAt     DateTime @default(now())
 
   @@index([company])
+}
+
+model ActivationStep {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+
+  step          String   // e.g. "profile", "resume", "salary", "offer"
+  completed     Boolean  @default(false)
+  completedAt   DateTime?
+
+  createdAt     DateTime @default(now())
+
+  @@unique([userId, step])
+}
+
+model Contribution {
+  id            String   @id @default(cuid())
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id])
+
+  type          String   // "salary" | "review"
+  company       String
+  role          String?
+  city          String?
+  salary        Float?
+  rating        Int?
+  content       String?  // review text
+
+  approved      Boolean  @default(false)
+  points        Int      @default(10)
+
+  createdAt     DateTime @default(now())
+}
+
+model UserActivity {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+
+  action        String   // e.g. "analyzed_resume", "calculated_salary", "evaluated_offer", "contributed_data"
+  metadata      String?  // JSON string with extra data
+
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Streak {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id])
+
+  currentStreak Int      @default(0)
+  longestStreak Int      @default(0)
+  lastVisitDate DateTime?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

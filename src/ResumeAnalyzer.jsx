@@ -28,6 +28,16 @@ export default function ResumeAnalyzer() {
 
   const fileRef = useRef();
 
+  const logActivity = (action, metadata) => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+    fetch('http://localhost:3001/api/activity/log', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, action, metadata: metadata || {} }),
+    }).catch(() => {});
+  };
+
   const ROLES = [
     "Software Engineer",
     "Senior Engineer",
@@ -156,6 +166,7 @@ export default function ResumeAnalyzer() {
       };
 
       setResult(simulationResult);
+      logActivity('analyzed_resume', { role, score: simulationResult.overallScore });
 
       fetch('http://localhost:3001/api/resume', {
         method: 'POST',

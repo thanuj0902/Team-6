@@ -65,6 +65,80 @@ createServer(async (req, res) => {
       return;
     }
 
+    if (url.pathname === '/api/activation' && req.method === 'GET') {
+      const userId = url.searchParams.get('userId');
+      const result = await db.getActivationSteps(userId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ data: result }));
+      return;
+    }
+
+    if (url.pathname === '/api/activation/complete' && req.method === 'POST') {
+      const data = await readBody();
+      const result = await db.completeActivationStep(data.userId, data.step);
+      await db.logActivity(data.userId, `completed_${data.step}`, { step: data.step });
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, data: result }));
+      return;
+    }
+
+    if (url.pathname === '/api/contribution' && req.method === 'POST') {
+      const data = await readBody();
+      const result = await db.saveContribution(data);
+      await db.logActivity(data.userId, 'contributed_data', { type: data.type, company: data.company });
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, data: result }));
+      return;
+    }
+
+    if (url.pathname === '/api/contributions' && req.method === 'GET') {
+      const userId = url.searchParams.get('userId');
+      const result = await db.getUserContributions(userId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ data: result }));
+      return;
+    }
+
+    if (url.pathname === '/api/activity' && req.method === 'GET') {
+      const userId = url.searchParams.get('userId');
+      const result = await db.getUserActivities(userId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ data: result }));
+      return;
+    }
+
+    if (url.pathname === '/api/activity/log' && req.method === 'POST') {
+      const data = await readBody();
+      const result = await db.logActivity(data.userId, data.action, data.metadata);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, data: result }));
+      return;
+    }
+
+    if (url.pathname === '/api/streak' && req.method === 'GET') {
+      const userId = url.searchParams.get('userId');
+      const result = await db.getOrCreateStreak(userId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ data: result }));
+      return;
+    }
+
+    if (url.pathname === '/api/streak/visit' && req.method === 'POST') {
+      const data = await readBody();
+      const result = await db.recordVisit(data.userId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, data: result }));
+      return;
+    }
+
+    if (url.pathname === '/api/user/stats' && req.method === 'GET') {
+      const userId = url.searchParams.get('userId');
+      const result = await db.getUserStats(userId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ data: result }));
+      return;
+    }
+
     res.writeHead(404);
     res.end(JSON.stringify({ error: 'Not found' }));
   } catch (e) {

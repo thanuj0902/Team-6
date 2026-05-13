@@ -92,6 +92,16 @@ export default function OfferCalculator() {
   const goMStep = (n) => { setAnimIn(false); setTimeout(() => { setMStep(n); setAnimIn(true); }, 180); };
   const reset   = () => { setMode("landing"); setBase(""); setBonus(""); setEquity(""); setJoining(""); setPasteText(""); setMStep(1); setAiError(""); };
 
+  const logActivity = (action, metadata) => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+    fetch('http://localhost:3001/api/activity/log', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, action, metadata: metadata || {} }),
+    }).catch(() => {});
+  };
+
   const readFile = (file) => {
     if (!file) return;
     const reader = new FileReader();
@@ -157,6 +167,7 @@ export default function OfferCalculator() {
       }).then(r => { if (!r.ok) console.error('Failed to save offer'); }).catch(e => console.error('Save offer error:', e));
 
       setMode("result");
+      logActivity('evaluated_offer', { company: d.company || company, role: d.role || role, verdict: lbl });
     } catch (e) {
       setAiError("Couldn't parse the offer automatically. Please enter details manually.");
       setMode("paste");
@@ -359,7 +370,7 @@ export default function OfferCalculator() {
                 </div>
                 <div style={{ display:"flex",gap:10 }}>
                   <button className="btn btn-g" onClick={() => goMStep(2)}>← Back</button>
-                  <button className="btn btn-p" style={{ flex:1 }} disabled={!base} onClick={() => setMode("result")}>Analyse Offer →</button>
+                  <button className="btn btn-p" style={{ flex:1 }} disabled={!base} onClick={() => { setMode("result"); logActivity('evaluated_offer', { role, company, city }); }}>Analyse Offer →</button>
                 </div>
               </div>
             )}

@@ -26,6 +26,38 @@ const ToolsHub = ({ onSelectTool }) => {
       color: '#a855f7',
       tag: 'Negotiation'
     },
+    {
+      id: 'activation',
+      name: 'Activation Journey',
+      description: 'Guided onboarding checklist to unlock all features and earn badges.',
+      icon: '🚀',
+      color: '#f59e0b',
+      tag: 'Growth'
+    },
+    {
+      id: 'contribute',
+      name: 'Contribute Data',
+      description: 'Share salary data and company reviews to help the community.',
+      icon: '📊',
+      color: '#8b5cf6',
+      tag: 'Community'
+    },
+    {
+      id: 'engagement',
+      name: 'Activity Dashboard',
+      description: 'Track streaks, earn badges, and monitor your engagement history.',
+      icon: '🏆',
+      color: '#10b981',
+      tag: 'Engagement'
+    },
+    {
+      id: 'growth',
+      name: 'Growth Experiments',
+      description: 'Refer friends, share results, and help us grow the TalentDash community.',
+      icon: '🌱',
+      color: '#ec4899',
+      tag: 'Referral'
+    },
   ];
 
   return (

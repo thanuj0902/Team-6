@@ -39,6 +39,16 @@ export default function SalaryCalculator() {
   const [skills, setSkills] = useState([]);
   const [show, setShow] = useState(false);
 
+  const logActivity = (action, metadata) => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+    fetch('http://localhost:3001/api/activity/log', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, action, metadata: metadata || {} }),
+    }).catch(() => {});
+  };
+
   const toggleSkill = (s) => setSkills(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
 
   const base = BASE_SALARIES[role] || 2000000;
@@ -157,6 +167,7 @@ export default function SalaryCalculator() {
           </div>
           <button className="btn-calc" onClick={() => {
             setShow(true);
+            logActivity('calculated_salary', { role, company, city, tier });
             fetch('http://localhost:3001/api/salary', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
