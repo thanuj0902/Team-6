@@ -233,7 +233,7 @@ export default function ResumeAnalyzer() {
       <svg
         width={size}
         height={size}
-        style={{ transform: "rotate(-90deg)" }}
+        className="rotate-[-90deg]"
       >
         <circle
           cx={size / 2}
@@ -282,185 +282,48 @@ export default function ResumeAnalyzer() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background:
-          "linear-gradient(145deg, #020818 0%, #040d20 35%, #060f1c 60%, #030a14 100%)",
-        color: "#e0e0f0",
-        fontFamily: "'Space Grotesk', sans-serif",
-      }}
-    >
-      <header style={{ display:"flex",alignItems:"center",backdropFilter:"blur(24px)",position:"sticky",top:0,background:"rgba(13,11,34,0.82)",zIndex:20 }}>
-        <div style={{ flex:1,display:"flex",alignItems:"center",gap:12 }}>
-          <div style={{ width:8,height:8,background:"#00ff9d",borderRadius:"50%",boxShadow:"0 0 8px #00ff9d" }}/>
-          <span style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:16,letterSpacing:"0.1em",color:"#fff" }}>TALENT<span style={{ color:"#00ff9d" }}>DASH</span></span>
-          <span style={{ color:"rgba(99,102,241,0.3)",margin:"0 6px" }}>·</span>
-          <span style={{ fontSize:11,color:"#a5b4fc",letterSpacing:"0.1em" }}>RESUME ANALYZER</span>
+    <div className="min-h-screen bg-[linear-gradient(145deg,#020818_0%,#040d20_35%,#060f1c_60%,#030a14_100%)] text-[#e0e0f0] font-['Space_Grotesk',sans-serif]">
+      <header className="flex items-center backdrop-blur-3xl sticky top-0 bg-[rgba(13,11,34,0.82)] z-20">
+        <div className="flex-1 flex items-center gap-3">
+          <div className="w-2 h-2 bg-[#00ff9d] rounded-full shadow-[0_0_8px_#00ff9d]" />
+          <span className="font-['Syne',sans-serif] font-extrabold text-base tracking-[0.1em] text-white">TALENT<span className="text-[#00ff9d]">DASH</span></span>
+          <span className="text-[rgba(99,102,241,0.3)] mx-1.5">·</span>
+          <span className="text-[11px] text-[#a5b4fc] tracking-[0.1em]">RESUME ANALYZER</span>
         </div>
-        <div style={{ display:"flex",gap:6,alignItems:"center" }}>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Dashboard</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'offer'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Offer</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Salary</button>
+        <div className="flex gap-1.5 items-center">
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} className="px-3 py-1.5 text-[11px] bg-transparent border border-[rgba(255,255,255,0.1)] rounded-md text-[#8890b0] cursor-pointer">Dashboard</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'offer'}))} className="px-3 py-1.5 text-[11px] bg-transparent border border-[rgba(255,255,255,0.1)] rounded-md text-[#8890b0] cursor-pointer">Offer</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} className="px-3 py-1.5 text-[11px] bg-transparent border border-[rgba(255,255,255,0.1)] rounded-md text-[#8890b0] cursor-pointer">Salary</button>
         </div>
-        <div style={{ flex:1 }}/>
+        <div className="flex-1" />
       </header>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-
-        * {
-          box-sizing: border-box;
-        }
-
-        .textarea-resume {
-          width: 100%;
-          min-height: 240px;
-          padding: 16px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(0,255,157,0.15);
-          border-radius: 12px;
-          color: #c8d0e8;
-          resize: vertical;
-          outline: none;
-          line-height: 1.6;
-        }
-
-        .textarea-resume:focus {
-          border-color: #00ff9d;
-        }
-
-        .chip {
-          padding: 8px 16px;
-          border-radius: 8px;
-          border: 1px solid rgba(0,255,157,0.15);
-          background: rgba(255,255,255,0.03);
-          color: #7f88b2;
-          cursor: pointer;
-          transition: 0.2s;
-        }
-
-        .chip.active {
-          background: rgba(0,255,157,0.1);
-          border-color: #00ff9d;
-          color: #00ff9d;
-        }
-
-        .btn-analyze {
-          width: 100%;
-          padding: 16px;
-          border: none;
-          border-radius: 12px;
-          background: linear-gradient(135deg,#00ff9d,#00d4ff);
-          color: #020818;
-          font-weight: 700;
-          cursor: pointer;
-          transition: 0.2s;
-        }
-
-        .btn-analyze:hover {
-          transform: translateY(-2px);
-        }
-
-        .card {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(0,255,157,0.08);
-          border-radius: 14px;
-          padding: 20px;
-        }
-
-        .drop-zone {
-          border: 1.5px dashed rgba(0,255,157,0.25);
-          padding: 24px;
-          border-radius: 12px;
-          text-align: center;
-          cursor: pointer;
-          margin-bottom: 14px;
-          transition: 0.2s;
-        }
-
-        .drop-zone:hover {
-          border-color: #00ff9d;
-          background: rgba(0,255,157,0.04);
-        }
-
-        .bar {
-          height: 5px;
-          background: rgba(255,255,255,0.06);
-          border-radius: 999px;
-          overflow: hidden;
-          margin-top: 8px;
-        }
-
-        .bar-fill {
-          height: 100%;
-          border-radius: 999px;
-        }
-
-        .tag {
-          display: inline-block;
-          margin: 4px;
-          padding: 6px 12px;
-          border-radius: 999px;
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(0,255,157,0.15);
-          font-size: 12px;
-          color: #aeb7da;
-        }
-      `}</style>
 
       <div
+        className="max-w-[1200px] mx-auto px-6 py-10 grid gap-[30px]"
         style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "40px 24px",
-          display: "grid",
           gridTemplateColumns: result ? "1fr 1.1fr" : "1fr",
-          gap: 30,
         }}
       >
         <div>
-          <h1
-            style={{
-              fontSize: 42,
-              marginBottom: 8,
-            }}
-          >
-            Resume <span style={{ color: "#00ff9d" }}>Analyzer</span>
+          <h1 className="text-[42px] mb-2">
+            Resume <span className="text-[#00ff9d]">Analyzer</span>
           </h1>
 
-          <p
-            style={{
-              color: "#697298",
-              marginBottom: 30,
-              lineHeight: 1.7,
-            }}
-          >
+          <p className="text-[#697298] mb-[30px] leading-[1.7]">
             AI-powered ATS analysis, keyword detection, and
             salary estimation.
           </p>
 
-          <div style={{ marginBottom: 18 }}>
-            <div
-              style={{
-                fontSize: 12,
-                marginBottom: 10,
-                color: "#697298",
-              }}
-            >
+          <div className="mb-[18px]">
+            <div className="text-xs mb-2.5 text-[#697298]">
               TARGET ROLE
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 8,
-              }}
-            >
+            <div className="flex flex-wrap gap-2">
               {ROLES.map((r) => (
                 <button
                   key={r}
-                  className={`chip ${role === r ? "active" : ""}`}
+                  className={`px-4 py-2 rounded-lg border border-[rgba(0,255,157,0.15)] bg-[rgba(255,255,255,0.03)] text-[#7f88b2] cursor-pointer transition-all duration-200 hover:border-[#00ff9d] hover:text-[#00ff9d] ${role === r ? "bg-[rgba(0,255,157,0.1)] border-[#00ff9d] text-[#00ff9d]" : ""}`}
                   onClick={() => setRole(r)}
                 >
                   {r}
@@ -470,7 +333,7 @@ export default function ResumeAnalyzer() {
           </div>
 
           <div
-            className="drop-zone"
+            className="border-[1.5px] border-dashed border-[rgba(0,255,157,0.25)] p-6 rounded-xl text-center cursor-pointer mb-3.5 transition-all duration-200 hover:border-[#00ff9d] hover:bg-[rgba(0,255,157,0.04)]"
             onClick={() => fileRef.current?.click()}
             onDragOver={(e) => {
               e.preventDefault();
@@ -487,47 +350,35 @@ export default function ResumeAnalyzer() {
               ref={fileRef}
               type="file"
               accept=".txt,.md"
-              style={{ display: "none" }}
+              className="hidden"
               onChange={(e) =>
                 handleFile(e.target.files[0])
               }
             />
 
-            <div style={{ fontSize: 28 }}>⬆</div>
+            <div className="text-[28px]">⬆</div>
 
-            <div style={{ marginTop: 8, color: "#697298" }}>
+            <div className="mt-2 text-[#697298]">
               Upload .txt or .md resume
             </div>
           </div>
 
           <textarea
-            className="textarea-resume"
+            className="w-full min-h-[240px] p-4 bg-[rgba(255,255,255,0.03)] border border-[rgba(0,255,157,0.15)] rounded-xl text-[#c8d0e8] resize-y outline-none leading-[1.6] focus:border-[#00ff9d]"
             placeholder={`Paste your resume here...\n\n${SAMPLE_RESUME}`}
             value={resume}
             onChange={(e) => setResume(e.target.value)}
           />
 
           {error && (
-            <div
-              style={{
-                color: "#ff453a",
-                marginTop: 10,
-                fontSize: 13,
-              }}
-            >
+            <div className="text-[#ff453a] mt-2.5 text-[13px]">
               {error}
             </div>
           )}
 
-          <div
-            style={{
-              display: "flex",
-              gap: 10,
-              marginTop: 16,
-            }}
-          >
+          <div className="flex gap-2.5 mt-4">
             <button
-              className="btn-analyze"
+              className="w-full p-4 border-none rounded-xl bg-[linear-gradient(135deg,#00ff9d,#00d4ff)] text-[#020818] font-bold cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
               onClick={analyzeResume}
               disabled={loading}
             >
@@ -537,14 +388,7 @@ export default function ResumeAnalyzer() {
             </button>
 
             <button
-              style={{
-                padding: "16px 20px",
-                background: "transparent",
-                border: "1px solid #1e2247",
-                borderRadius: 12,
-                color: "#7f88b2",
-                cursor: "pointer",
-              }}
+              className="px-5 py-4 bg-transparent border border-[#1e2247] rounded-xl text-[#7f88b2] cursor-pointer"
               onClick={() => setResume(SAMPLE_RESUME)}
             >
               Sample
@@ -554,14 +398,7 @@ export default function ResumeAnalyzer() {
 
         {result && (
           <div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr",
-                gap: 12,
-                marginBottom: 18,
-              }}
-            >
+            <div className="grid grid-cols-3 gap-3 mb-[18px]">
               {[
                 {
                   label: "OVERALL",
@@ -578,103 +415,52 @@ export default function ResumeAnalyzer() {
               ].map(({ label, score }) => (
                 <div
                   key={label}
-                  className="card"
-                  style={{ textAlign: "center" }}
+                  className="bg-[rgba(255,255,255,0.03)] border border-[rgba(0,255,157,0.08)] rounded-[14px] p-5 text-center"
                 >
                   <CircleScore score={score} size={90} />
 
-                  <div
-                    style={{
-                      marginTop: 10,
-                      fontSize: 11,
-                      color: "#697298",
-                    }}
-                  >
+                  <div className="mt-2.5 text-[11px] text-[#697298]">
                     {label}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="card" style={{ marginBottom: 18 }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: 14,
-                }}
-              >
+            <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(0,255,157,0.08)] rounded-[14px] p-5 mb-[18px]">
+              <div className="flex justify-between mb-3.5">
                 <div>Assessment</div>
 
-                <div style={{ color: "#00ff9d" }}>
+                <div className="text-[#00ff9d]">
                   {result.level}
                 </div>
               </div>
 
-              <p
-                style={{
-                  color: "#bfc7e8",
-                  lineHeight: 1.7,
-                }}
-              >
+              <p className="text-[#bfc7e8] leading-[1.7]">
                 {result.verdict}
               </p>
 
-              <div
-                style={{
-                  marginTop: 18,
-                  paddingTop: 18,
-                  borderTop: "1px solid #1e2247",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 12,
-                    color: "#697298",
-                  }}
-                >
+              <div className="mt-[18px] pt-[18px] border-t border-[#1e2247]">
+                <div className="text-xs text-[#697298]">
                   EST. SALARY RANGE
                 </div>
 
-                <div
-                  style={{
-                    marginTop: 8,
-                    fontSize: 22,
-                    fontWeight: 700,
-                    color: "#00ff9d",
-                  }}
-                >
+                <div className="mt-2 text-[22px] font-bold text-[#00ff9d]">
                   ₹{result.salaryRange.low}L – ₹
                   {result.salaryRange.high}L
                 </div>
               </div>
             </div>
 
-            <div className="card" style={{ marginBottom: 18 }}>
-              <div
-                style={{
-                  marginBottom: 16,
-                  color: "#697298",
-                  fontSize: 12,
-                }}
-              >
+            <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(0,255,157,0.08)] rounded-[14px] p-5 mb-[18px]">
+              <div className="mb-4 text-[#697298] text-xs">
                 SECTION BREAKDOWN
               </div>
 
               {Object.entries(result.sections).map(
                 ([key, val]) => (
-                  <div key={key} style={{ marginBottom: 16 }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <div
-                        style={{
-                          textTransform: "capitalize",
-                        }}
-                      >
+                  <div key={key} className="mb-4">
+                    <div className="flex justify-between">
+                      <div className="capitalize">
                         {key}
                       </div>
 
@@ -687,9 +473,9 @@ export default function ResumeAnalyzer() {
                       </div>
                     </div>
 
-                    <div className="bar">
+                    <div className="h-[5px] bg-[rgba(255,255,255,0.06)] rounded-full overflow-hidden mt-2">
                       <div
-                        className="bar-fill"
+                        className="h-full rounded-full"
                         style={{
                           width: `${val.score * 10}%`,
                           background: scoreColor(val.score),
@@ -697,14 +483,7 @@ export default function ResumeAnalyzer() {
                       />
                     </div>
 
-                    <div
-                      style={{
-                        marginTop: 6,
-                        fontSize: 12,
-                        color: "#7f88b2",
-                        lineHeight: 1.5,
-                      }}
-                    >
+                    <div className="mt-1.5 text-xs text-[#7f88b2] leading-[1.5]">
                       {val.feedback}
                     </div>
                   </div>
@@ -712,79 +491,40 @@ export default function ResumeAnalyzer() {
               )}
             </div>
 
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 12,
-                marginBottom: 18,
-              }}
-            >
-              <div className="card">
-                <div
-                  style={{
-                    marginBottom: 12,
-                    color: "#697298",
-                    fontSize: 12,
-                  }}
-                >
+            <div className="grid grid-cols-2 gap-3 mb-[18px]">
+              <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(0,255,157,0.08)] rounded-[14px] p-5">
+                <div className="mb-3 text-[#697298] text-xs">
                   STRENGTHS
                 </div>
 
                 {result.strengths.map((s, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      marginBottom: 8,
-                      color: "#cfd6f2",
-                      fontSize: 13,
-                    }}
-                  >
+                  <div key={i} className="mb-2 text-[#cfd6f2] text-[13px]">
                     ✓ {s}
                   </div>
                 ))}
               </div>
 
-              <div className="card">
-                <div
-                  style={{
-                    marginBottom: 12,
-                    color: "#697298",
-                    fontSize: 12,
-                  }}
-                >
+              <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(0,255,157,0.08)] rounded-[14px] p-5">
+                <div className="mb-3 text-[#697298] text-xs">
                   IMPROVEMENTS
                 </div>
 
                 {result.improvements.map((s, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      marginBottom: 8,
-                      color: "#cfd6f2",
-                      fontSize: 13,
-                    }}
-                  >
+                  <div key={i} className="mb-2 text-[#cfd6f2] text-[13px]">
                     ! {s}
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="card">
-              <div
-                style={{
-                  marginBottom: 12,
-                  color: "#697298",
-                  fontSize: 12,
-                }}
-              >
+            <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(0,255,157,0.08)] rounded-[14px] p-5">
+              <div className="mb-3 text-[#697298] text-xs">
                 MISSING KEYWORDS
               </div>
 
               <div>
                 {result.missingKeywords.map((k) => (
-                  <span key={k} className="tag">
+                  <span key={k} className="inline-block m-1 px-3 py-1.5 rounded-full bg-[rgba(255,255,255,0.04)] border border-[rgba(0,255,157,0.15)] text-xs text-[#aeb7da]">
                     {k}
                   </span>
                 ))}

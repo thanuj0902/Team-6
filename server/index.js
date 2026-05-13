@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { createServer } from 'http';
-import { db } from './src/lib/db.js';
+import { db } from './db.js';
 
 const PORT = 3001;
 

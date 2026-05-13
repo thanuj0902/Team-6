@@ -16,34 +16,23 @@ export default function Onboarding() {
   const nextStep = () => setStep(step + 1);
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(145deg, #020818 0%, #040d20 35%, #060f1c 60%, #030a14 100%)',
-      color: '#e0e0f0',
-      fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-    }}>
-      <header style={{ padding:"18px 32px",display:"flex",alignItems:"center",backdropFilter:"blur(24px)",position:"sticky",top:0,background:"rgba(13,11,34,0.82)",borderBottom:"1px solid rgba(99,102,241,0.13)",zIndex:20 }}>
-        <div style={{ flex:1,display:"flex",alignItems:"center",gap:12 }}>
-          <div style={{ width:8,height:8,background:"#00ff9d",borderRadius:"50%",boxShadow:"0 0 8px #00ff9d" }}/>
-          <span style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:16,letterSpacing:"0.1em",color:"#fff" }}>TALENT<span style={{ color:"#00ff9d" }}>DASH</span></span>
-          <span style={{ color:"rgba(99,102,241,0.3)",margin:"0 6px" }}>·</span>
-          <span style={{ fontSize:11,color:"#a5b4fc",letterSpacing:"0.1em" }}>ONBOARDING</span>
+    <div className="min-h-screen bg-[linear-gradient(145deg,#020818_0%,#040d20_35%,#060f1c_60%,#030a14_100%)] text-[#e0e0f0] font-['Space_Grotesk','Inter',sans-serif]">
+      <header className="px-8 py-[18px] flex items-center backdrop-blur-2xl sticky top-0 bg-[rgba(13,11,34,0.82)] border-b border-[rgba(99,102,241,0.13)] z-20">
+        <div className="flex-1 flex items-center gap-3">
+          <div className="w-2 h-2 bg-[#00ff9d] rounded-full shadow-[0_0_8px_#00ff9d]" />
+          <span className="font-['Syne',sans-serif] font-extrabold text-base tracking-[0.1em] text-white">TALENT<span className="text-[#00ff9d]">DASH</span></span>
+          <span className="text-[rgba(99,102,241,0.3)] mx-1.5">·</span>
+          <span className="text-[11px] text-indigo-300 tracking-[0.1em]">ONBOARDING</span>
         </div>
-        <div style={{ display:"flex",gap:6,alignItems:"center" }}>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Dashboard</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'offer'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Offer</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Salary</button>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'resume'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Resume</button>
+        <div className="flex gap-1.5 items-center">
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} className="px-3 py-1.5 text-[11px] bg-transparent border border-[rgba(255,255,255,0.1)] rounded-md text-[#8890b0] cursor-pointer">Dashboard</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'offer'}))} className="px-3 py-1.5 text-[11px] bg-transparent border border-[rgba(255,255,255,0.1)] rounded-md text-[#8890b0] cursor-pointer">Offer</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} className="px-3 py-1.5 text-[11px] bg-transparent border border-[rgba(255,255,255,0.1)] rounded-md text-[#8890b0] cursor-pointer">Salary</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'resume'}))} className="px-3 py-1.5 text-[11px] bg-transparent border border-[rgba(255,255,255,0.1)] rounded-md text-[#8890b0] cursor-pointer">Resume</button>
         </div>
-        <div style={{ flex:1 }}/>
+        <div className="flex-1" />
       </header>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '24px',
-        minHeight: 'calc(100vh - 60px)'
-      }}>
+      <div className="flex items-center justify-center p-6 min-h-[calc(100vh-60px)]">
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
           .onboard-card {
@@ -118,8 +107,8 @@ export default function Onboarding() {
 
           {step === 1 && (
             <div className="fade">
-              <h2 style={{ fontSize: 32, fontWeight: 700, marginBottom: 12 }}>Create Account</h2>
-              <p style={{ color: '#8890b0', marginBottom: 32, fontSize: 14 }}>Save your analysis and unlock personalized growth roadmaps.</p>
+              <h2 className="text-[32px] font-bold mb-3">Create Account</h2>
+              <p className="text-[#8890b0] mb-8 text-sm">Save your analysis and unlock personalized growth roadmaps.</p>
               <input name="email" className="inp-onboard" placeholder="Email Address" value={formData.email} onChange={handleInput} />
               <input name="password" type="password" className="inp-onboard" placeholder="Password" value={formData.password} onChange={handleInput} />
               <button className="btn-next" onClick={nextStep}>Continue →</button>
@@ -128,17 +117,16 @@ export default function Onboarding() {
 
           {step === 2 && (
             <div className="fade">
-              <h2 style={{ fontSize: 32, fontWeight: 700, marginBottom: 12 }}>Tell us about you</h2>
-              <p style={{ color: '#8890b0', marginBottom: 32, fontSize: 14 }}>We'll use this to refine your market benchmarks.</p>
+              <h2 className="text-[32px] font-bold mb-3">Tell us about you</h2>
+              <p className="text-[#8890b0] mb-8 text-sm">We'll use this to refine your market benchmarks.</p>
               <input name="name" className="inp-onboard" placeholder="Full Name" value={formData.name} onChange={handleInput} />
-              <div style={{ marginBottom: 24 }}>
-                <label style={{ display: 'block', textAlign: 'left', fontSize: 12, color: '#8890b0', marginBottom: 8 }}>Current Role</label>
+              <div className="mb-6">
+                <label className="block text-left text-xs text-[#8890b0] mb-2">Current Role</label>
                 <select
                   name="role"
-                  className="inp-onboard"
+                  className="inp-onboard cursor-pointer"
                   value={formData.role}
                   onChange={handleInput}
-                  style={{ cursor: 'pointer' }}
                 >
                   <option>Software Engineer</option>
                   <option>Senior Engineer</option>
@@ -153,9 +141,9 @@ export default function Onboarding() {
 
           {step === 3 && (
             <div className="fade">
-              <div style={{ fontSize: 50, marginBottom: 20 }}>🚀</div>
-              <h2 style={{ fontSize: 32, fontWeight: 700, marginBottom: 12 }}>You're all set!</h2>
-              <p style={{ color: '#8890b0', marginBottom: 32, fontSize: 14 }}>Your profile is now connected to our market data. You can now save and track all your analyses.</p>
+              <div className="text-[50px] mb-5">🚀</div>
+              <h2 className="text-[32px] font-bold mb-3">You're all set!</h2>
+              <p className="text-[#8890b0] mb-8 text-sm">Your profile is now connected to our market data. You can now save and track all your analyses.</p>
               <button
                 className="btn-next"
                 onClick={async () => {

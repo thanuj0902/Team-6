@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "start": "node server.js",
-    "start:dev": "node server.js & vite"
+    "start": "node server/index.js",
+    "start:dev": "node server/index.js & vite"
   },
   "keywords": [],
   "author": "",
@@ -22,5 +22,10 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "vite": "^8.0.11"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^3.4.19"
   }
 }

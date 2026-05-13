@@ -1,6 +1,6 @@
-# Team-6 — Offer Calculator
+# TalentDash — Offer Calculator & Growth Suite
 
-A full-stack web application for comparing and tracking job offers. Built with **React + Vite** on the frontend and **Express + Prisma** on the backend, connected to a **Neon PostgreSQL** database.
+A full-stack career intelligence platform for benchmarking offers, analyzing resumes, calculating salary ranges, and tracking professional growth. Built with **React 19 + Vite** on the frontend and **Express + Prisma** on the backend, connected to a **Neon (PostgreSQL)** database.
 
 ---
 
@@ -8,40 +8,57 @@ A full-stack web application for comparing and tracking job offers. Built with *
 
 | Layer | Technology |
 |---|---|
-| Frontend | React 18, Vite |
-| Backend | Node.js, Express |
+| Frontend | React 19, Vite 8 |
+| Backend | Node.js, Express (HTTP server) |
 | Database | Neon (PostgreSQL) |
-| ORM | Prisma |
-| Auth | bcrypt (password hashing) |
-| Dev tooling | Concurrently, dotenv |
+| ORM | Prisma 7 + @prisma/adapter-neon |
+| Dev tooling | dotenv |
 
 ---
 
 ## Project Structure
 
 ```
-Team-6/
+offer-calc/
 ├── prisma/
-│   └── schema.prisma        # Database models (User, Offer)
+│   └── schema.prisma          # 8 models: User, SalaryPoint, ResumeScore, OfferAnalysis, ActivationStep, Contribution, UserActivity, Streak
 ├── server/
-│   ├── db.js                # Prisma client singleton
-│   ├── index.js             # Express server entry point
-│   └── routes/
-│       ├── auth.js          # POST /api/auth/signup, /login
-│       └── offers.js        # GET / POST / DELETE /api/offers
+│   ├── index.js               # Express server with inline route handlers
+│   └── db.js                  # Prisma client singleton + data access layer
 ├── src/
-│   ├── App.jsx              # Root component, session routing
-│   ├── Onboarding.jsx       # Signup / Login UI
-│   ├── Dashboard.jsx        # Offer calculator + saved offers
-│   ├── main.jsx             # React entry point
-│   └── index.css            # Global styles
+│   ├── App.jsx                # Root component with tab-based routing
+│   ├── main.jsx               # React entry point
+│   └── components/
+│       ├── ToolsHub.jsx           # Dashboard — 7-tool launcher
+│       ├── OfferCalculator.jsx    # AI-powered offer evaluation & benchmarking
+│       ├── SalaryCalculator.jsx   # Compensation estimator by role/exp/location
+│       ├── ResumeAnalyzer.jsx     # ATS scoring and skill gap analysis
+│       ├── ActivationFunnel.jsx   # Guided onboarding checklist with badges
+│       ├── ContributionFlow.jsx   # Community salary/review data sharing
+│       ├── EngagementDashboard.jsx# Streaks, activity log, and badges
+│       ├── GrowthExperiments.jsx  # Referral program and social sharing
+│       └── Onboarding.jsx         # Signup / profile creation flow
 ├── index.html
-├── vite.config.js           # Vite + API proxy config
-├── prisma.config.ts         # Prisma config (reads from .env)
+├── vite.config.js
+├── prisma.config.ts
 ├── package.json
-├── .env.example             # Environment variable template
+├── .env                         # Database connection string (not committed)
 └── .gitignore
 ```
+
+---
+
+## Features
+
+| Tool | Description |
+|---|---|
+| **Offer Calculator** | Paste or upload an offer letter for AI extraction; benchmark against 4Cr+ data points; get verdict (Below Market → Exceptional) with percentile bars |
+| **Salary Calculator** | Estimate compensation by role, experience, company tier, location, and skills; view tax breakdowns under New/Old regimes |
+| **Resume Analyzer** | AI-powered ATS scoring, keyword gap analysis, and improvement suggestions |
+| **Activation Funnel** | Guided 5-step onboarding (profile → resume → salary → offer → contribute) with badge rewards |
+| **Contribution Flow** | Share salary data and company reviews to earn community points |
+| **Engagement Dashboard** | Track daily streaks, earned badges, and recent activity history |
+| **Growth Experiments** | Referral program with share-to-social links |
 
 ---
 
@@ -55,45 +72,36 @@ Team-6/
 ### 2. Clone & Install
 
 ```bash
-git clone https://github.com/thanuj0902/Team-6.git
-cd Team-6
+git clone <repo-url>
+cd offer-calc
 npm install
 ```
 
 ### 3. Set Up Environment Variables
 
-```bash
-cp .env.example .env
-```
-
-Open `.env` and fill in your two Neon connection strings:
+Create a `.env` file in the project root:
 
 ```env
-# Pooled connection — used by Prisma Client at runtime
-DATABASE_URL="postgresql://USER:PASSWORD@ep-xxxx.us-east-1.aws.neon.tech/neondb?sslmode=require&pgbouncer=true"
-
-# Direct connection — used by Prisma Migrate
-DIRECT_URL="postgresql://USER:PASSWORD@ep-xxxx.us-east-1.aws.neon.tech/neondb?sslmode=require"
-
-PORT=3001
+DATABASE_URL="postgresql://USER:PASSWORD@ep-xxxx.us-east-1.aws.neon.tech/neondb?sslmode=require"
 ```
 
-> Both strings are found in your Neon dashboard under **Connection Details**.
+This is the pooled connection string from your Neon dashboard under **Connection Details**.
 
 ### 4. Push Schema & Generate Client
 
 ```bash
-npm run db:push       # Creates User + Offer tables in Neon
-npm run db:generate   # Generates the Prisma client
+npx prisma db push          # Creates all 8 tables in Neon
+npx prisma generate         # Generates the Prisma client
 ```
 
 ### 5. Run the App
 
 ```bash
-npm run start
+npm run dev                  # Frontend only (Vite on port 5173)
+npm run start                # Backend API only (port 3001)
+npm run start:dev            # Both simultaneously
 ```
 
-This starts both servers simultaneously:
 - **Frontend** → http://localhost:5173
 - **Backend** → http://localhost:3001
 
@@ -103,31 +111,65 @@ This starts both servers simultaneously:
 
 | Script | Description |
 |---|---|
-| `npm run start` | Run frontend + backend together |
-| `npm run dev` | Frontend only (Vite) |
-| `npm run server` | Backend only (Express) |
-| `npm run build` | Production build |
-| `npm run db:push` | Push Prisma schema to Neon |
-| `npm run db:generate` | Generate Prisma client |
-| `npm run db:migrate` | Run migrations (dev) |
-| `npm run db:studio` | Open Prisma Studio GUI |
+| `npm run dev` | Vite dev server (frontend only) |
+| `npm run start` | Express API server (backend only) |
+| `npm run start:dev` | Run both frontend + backend |
+| `npm run build` | Production build via Vite |
 
 ---
 
 ## API Endpoints
 
-### Auth
+All endpoints return JSON. The database layer is in `server/db.js`.
+
+### Users
+
 | Method | Endpoint | Description |
 |---|---|---|
-| POST | `/api/auth/signup` | Create a new user account |
-| POST | `/api/auth/login` | Log in with email + password |
+| POST | `/api/user` | Create a new user (email, name, role) |
 
 ### Offers
+
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/api/offers?userId=1` | Get all offers for a user |
-| POST | `/api/offers` | Save a new offer |
-| DELETE | `/api/offers/:id` | Delete an offer |
+| POST | `/api/offer` | Save an offer analysis result |
+
+### Resumes
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/resume` | Save a resume score analysis |
+
+### Salaries
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/salary` | Save a salary calculation |
+| GET | `/api/salary/benchmarks?role=&city=` | Get aggregate benchmark data |
+
+### Activation
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/activation?userId=` | Get user's activation steps |
+| POST | `/api/activation/complete` | Mark a step as completed |
+
+### Contributions
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/contribution` | Submit salary or review data |
+| GET | `/api/contributions?userId=` | Get user's contributions |
+
+### Activity & Engagement
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/activity?userId=` | Get user's activity log |
+| POST | `/api/activity/log` | Log a user action |
+| GET | `/api/streak?userId=` | Get or create streak data |
+| POST | `/api/streak/visit` | Record a daily visit |
+| GET | `/api/user/stats?userId=` | Aggregate stats (counts per feature) |
 
 ---
 
@@ -135,25 +177,110 @@ This starts both servers simultaneously:
 
 ```prisma
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String   // bcrypt hashed
-  name      String?
-  createdAt DateTime @default(now())
-  offers    Offer[]
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  role          String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  salaryPoints       SalaryPoint[]
+  resumeScores       ResumeScore[]
+  offerAnalyses      OfferAnalysis[]
+  activationSteps    ActivationStep[]
+  contributions      Contribution[]
+  activities         UserActivity[]
+  streak             Streak?
 }
 
-model Offer {
-  id           Int      @id @default(autoincrement())
-  userId       Int
-  companyName  String
+model SalaryPoint {
+  id           String   @id @default(cuid())
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id])
+  role         String
+  experience   Int
+  city         String
+  company      String?
+  companyTier  String
   baseSalary   Float
-  bonus        Float
-  equity       Float
-  signingBonus Float
-  benefits     String?
-  notes        String?
+  bonus        Float?
+  equity       Float?
+  totalCTC     Float
   createdAt    DateTime @default(now())
+}
+
+model ResumeScore {
+  id              String   @id @default(cuid())
+  userId          String?
+  user            User?    @relation(fields: [userId], references: [id])
+  overallScore    Int
+  atsScore        Int
+  role            String
+  level           String
+  missingKeywords String[]
+  strengths       String[]
+  improvements    String[]
+  createdAt       DateTime @default(now())
+}
+
+model OfferAnalysis {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  company   String
+  role      String
+  city      String
+  expLevel  String
+  totalCTC  Float
+  verdict   String
+  createdAt DateTime @default(now())
+}
+
+model ActivationStep {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  step        String
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  @@unique([userId, step])
+}
+
+model Contribution {
+  id        String    @id @default(cuid())
+  userId    String?
+  user      User?     @relation(fields: [userId], references: [id])
+  type      String
+  company   String
+  role      String?
+  city      String?
+  salary    Float?
+  rating    Int?
+  content   String?
+  approved  Boolean   @default(false)
+  points    Int       @default(10)
+  createdAt DateTime  @default(now())
+}
+
+model UserActivity {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  action    String
+  metadata  String?
+  createdAt DateTime @default(now())
+}
+
+model Streak {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+  currentStreak Int       @default(0)
+  longestStreak Int       @default(0)
+  lastVisitDate DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 ```
 
@@ -161,14 +288,12 @@ model Offer {
 
 ## Security Notes
 
-- Passwords are hashed with **bcrypt** (10 salt rounds) — never stored in plain text
 - The `.env` file is in `.gitignore` and must **never** be committed
-- Use `.env.example` as the template for collaborators
-- If credentials were ever committed, **reset your Neon database password immediately** at neon.tech → Settings
+- If credentials were ever committed, **reset your Neon database password immediately**
+- `prisma.config.ts` may contain hardcoded connection strings — avoid committing it with live credentials
 
 ---
 
 ## Contributors
 
 - [@thanuj0902](https://github.com/thanuj0902)
-
