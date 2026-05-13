@@ -129,6 +129,33 @@ export default function OfferCalculator() {
       if (d.equity) setEquity(String(d.equity));
       if (d.joining) setJoining(String(d.joining));
 
+      const sal = parseFloat(d.base) || 0;
+      const bon = parseFloat(d.perfBonus) || 0;
+      const eq = parseFloat(d.equity) || 0;
+      const join = parseFloat(d.joining) || 0;
+      const total = sal + bon + (eq / 4) + join;
+      const bench = (MARKET_BENCHMARKS[d.role || role]?.[d.exp || exp] || 2500000) * (CITY_MULT[d.city || city] || 1.0);
+      const p50 = bench;
+      const p90 = bench * 1.7;
+      let lbl = "Below Market";
+      if (total >= p50 && total < bench * 1.3) lbl = "Competitive";
+      else if (total >= bench * 1.3 && total < p90) lbl = "Strong";
+      else if (total >= p90) lbl = "Exceptional";
+
+      fetch('http://localhost:3001/api/offer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: localStorage.getItem('userId'),
+          company: d.company || company,
+          role: d.role || role,
+          city: d.city || city,
+          expLevel: d.exp || exp,
+          totalCTC: total,
+          verdict: lbl
+        })
+      }).then(r => { if (!r.ok) console.error('Failed to save offer'); }).catch(e => console.error('Save offer error:', e));
+
       setMode("result");
     } catch (e) {
       setAiError("Couldn't parse the offer automatically. Please enter details manually.");
@@ -174,14 +201,23 @@ export default function OfferCalculator() {
         .drop:hover,.drop.over{border-color:rgba(99,102,241,0.6);background:rgba(99,102,241,0.07);}
       `}</style>
 
-      <header style={{ width:"100%",padding:"18px 32px",display:"flex",alignItems:"center",gap:14,backdropFilter:"blur(24px)",position:"sticky",top:0,background:"rgba(13,11,34,0.82)",borderBottom:"1px solid rgba(99,102,241,0.13)",zIndex:20 }}>
-        <div style={{ width:9,height:9,background:"linear-gradient(135deg,#6366f1,#3b82f6)",borderRadius:"50%",boxShadow:"0 0 12px #6366f1aa" }}/>
-        <span style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:16,letterSpacing:"0.1em",color:"#fff" }}>TALENT<span style={{ color:"#6366f1" }}>DASH</span></span>
-        <span style={{ color:"rgba(99,102,241,0.3)",margin:"0 6px" }}>·</span>
-        <span style={{ fontSize:11,color:"#a5b4fc",letterSpacing:"0.1em" }}>OFFER INTELLIGENCE</span>
-        {mode !== "landing" && (
-          <button onClick={reset} className="btn btn-g" style={{ marginLeft:"auto",padding:"8px 18px",fontSize:12 }}>← Home</button>
-        )}
+      <header style={{ width:"100%",padding:"18px 32px",display:"flex",alignItems:"center",backdropFilter:"blur(24px)",position:"sticky",top:0,background:"rgba(13,11,34,0.82)",borderBottom:"1px solid rgba(99,102,241,0.13)",zIndex:20 }}>
+        <div style={{ flex:1,display:"flex",alignItems:"center",gap:14 }}>
+          <div style={{ width:9,height:9,background:"linear-gradient(135deg,#6366f1,#3b82f6)",borderRadius:"50%",boxShadow:"0 0 12px #6366f1aa" }}/>
+          <span style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:16,letterSpacing:"0.1em",color:"#fff" }}>TALENT<span style={{ color:"#6366f1" }}>DASH</span></span>
+          <span style={{ color:"rgba(99,102,241,0.3)",margin:"0 6px" }}>·</span>
+          <span style={{ fontSize:11,color:"#a5b4fc",letterSpacing:"0.1em" }}>OFFER INTELLIGENCE</span>
+        </div>
+        <div style={{ display:"flex",gap:6,alignItems:"center" }}>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Dashboard</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Salary</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'resume'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Resume</button>
+        </div>
+        <div style={{ flex:1,display:"flex",justifyContent:"flex-end",alignItems:"center",gap:6 }}>
+          {mode !== "landing" && (
+            <button onClick={reset} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>← Back</button>
+          )}
+        </div>
       </header>
 
       <div style={{ width:"100%",maxWidth:660,margin:"0 auto",padding:"0 20px 80px",position:"relative",zIndex:1 }}>

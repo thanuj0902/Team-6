@@ -82,14 +82,19 @@ export default function SalaryCalculator() {
         @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
       `}</style>
 
-      <header style={{ padding: "18px 32px", borderBottom: "1px solid rgba(99,102,241,0.13)", display: "flex", justifyContent: "space-between", alignItems: "center", backdropFilter: "blur(24px)", position: "sticky", top: 0, background: "rgba(13,11,34,0.82)", zIndex: 10 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      <header style={{ padding: "18px 32px", borderBottom: "1px solid rgba(99,102,241,0.13)", display: "flex", alignItems: "center", backdropFilter: "blur(24px)", position: "sticky", top: 0, background: "rgba(13,11,34,0.82)", zIndex: 10 }}>
+        <div style={{ flex:1, display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ width: 8, height: 8, background: "#3b82f6", borderRadius: "50%" }} />
           <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 16, letterSpacing: "0.1em", color: "#fff" }}>TALENT<span style={{ color: "#6366f1" }}>DASH</span></span>
           <span style={{ color: "rgba(99,102,241,0.3)", margin: "0 6px" }}>·</span>
           <span style={{ fontSize: 11, color: "#3d4468", letterSpacing: "0.08em" }}>SALARY INTELLIGENCE</span>
         </div>
-        <span style={{ fontSize: 11, color: "#3d4468" }}>India Market · 2025</span>
+        <div style={{ display:"flex",gap:6,alignItems:"center" }}>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Dashboard</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'offer'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Offer</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'resume'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Resume</button>
+        </div>
+        <div style={{ flex:1 }}/>
       </header>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "calc(100vh - 65px)" }}>
@@ -150,7 +155,25 @@ export default function SalaryCalculator() {
               {SKILLS.map(s => <button key={s} className={`pill${skills.includes(s) ? " active" : ""}`} onClick={() => toggleSkill(s)}>{s}</button>)}
             </div>
           </div>
-          <button className="btn-calc" onClick={() => setShow(true)}>CALCULATE SALARY RANGE →</button>
+          <button className="btn-calc" onClick={() => {
+            setShow(true);
+            fetch('http://localhost:3001/api/salary', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                userId: localStorage.getItem('userId'),
+                role,
+                experience: exp,
+                city,
+                company,
+                companyTier: tier,
+                baseSalary: estimated,
+                bonus,
+                equity,
+                totalCTC: estimated + bonus + equity / 4
+              })
+            }).then(r => { if (!r.ok) console.error('Failed to save salary'); }).catch(e => console.error('Save salary error:', e));
+          }}>CALCULATE SALARY RANGE →</button>
         </div>
 
         <div style={{ padding: "48px 40px", display: "flex", flexDirection: "column", justifyContent: show ? "flex-start" : "center" }}>

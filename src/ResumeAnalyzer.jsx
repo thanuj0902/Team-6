@@ -156,6 +156,21 @@ export default function ResumeAnalyzer() {
       };
 
       setResult(simulationResult);
+
+      fetch('http://localhost:3001/api/resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: localStorage.getItem('userId'),
+          overallScore: simulationResult.overallScore,
+          atsScore: simulationResult.atsScore,
+          role,
+          level: simulationResult.level,
+          missingKeywords: simulationResult.missingKeywords,
+          strengths: simulationResult.strengths,
+          improvements: simulationResult.improvements
+        })
+      }).then(r => { if (!r.ok) console.error('Failed to save resume'); }).catch(e => console.error('Save resume error:', e));
     } catch (e) {
       console.error(e);
       setError("Analysis failed. Please try again.");
@@ -265,6 +280,20 @@ export default function ResumeAnalyzer() {
         fontFamily: "'Space Grotesk', sans-serif",
       }}
     >
+      <header style={{ display:"flex",alignItems:"center",backdropFilter:"blur(24px)",position:"sticky",top:0,background:"rgba(13,11,34,0.82)",zIndex:20 }}>
+        <div style={{ flex:1,display:"flex",alignItems:"center",gap:12 }}>
+          <div style={{ width:8,height:8,background:"#00ff9d",borderRadius:"50%",boxShadow:"0 0 8px #00ff9d" }}/>
+          <span style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:16,letterSpacing:"0.1em",color:"#fff" }}>TALENT<span style={{ color:"#00ff9d" }}>DASH</span></span>
+          <span style={{ color:"rgba(99,102,241,0.3)",margin:"0 6px" }}>·</span>
+          <span style={{ fontSize:11,color:"#a5b4fc",letterSpacing:"0.1em" }}>RESUME ANALYZER</span>
+        </div>
+        <div style={{ display:"flex",gap:6,alignItems:"center" }}>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'hub'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Dashboard</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'offer'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Offer</button>
+          <button onClick={() => window.dispatchEvent(new CustomEvent('changeTab',{detail:'salary'}))} style={{ padding:"6px 12px",fontSize:11,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",borderRadius:6,color:"#8890b0",cursor:"pointer" }}>Salary</button>
+        </div>
+        <div style={{ flex:1 }}/>
+      </header>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
