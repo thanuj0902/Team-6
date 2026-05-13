@@ -71,6 +71,13 @@
   border-radius: 6px;
   color: #8890b0;
   cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.ob-header-btn:hover {
+  border-color: rgba(0,255,157,0.4);
+  color: #c8d0f0;
+  background: rgba(0,255,157,0.08);
 }
 
 .ob-header-spacer {
@@ -131,8 +138,9 @@
   margin-bottom: 20px;
   outline: none;
   transition: all 0.2s;
-  cursor: pointer;
+  cursor: text;
 }
+.inp-onboard::placeholder { color: #4a5070; }
 
 .inp-onboard:focus {
   border-color: #00ff9d;
@@ -149,6 +157,7 @@
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+  font-family: inherit;
   transition: all 0.2s;
 }
 

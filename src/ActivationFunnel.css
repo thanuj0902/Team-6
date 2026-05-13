@@ -71,6 +71,13 @@
   border-radius: 6px;
   color: #8890b0;
   cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.af-dashboard-btn:hover {
+  border-color: rgba(245,158,11,0.4);
+  color: #c8d0f0;
+  background: rgba(245,158,11,0.08);
 }
 
 .af-header-spacer {
@@ -192,6 +199,10 @@
   color: #fff;
   border: none;
 }
+.btn-act:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245,158,11,0.4);
+}
 
 .af-step-icon {
   width: 44px;
@@ -244,7 +255,7 @@
 
 .af-step-points {
   font-size: 10px;
-  color: #4a5070;
+  color: #697298;
   margin-bottom: 4px;
 }
 

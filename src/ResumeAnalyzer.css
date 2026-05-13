@@ -4,12 +4,13 @@
   min-height: 100vh;
   background: linear-gradient(145deg, #020818 0%, #040d20 35%, #060f1c 60%, #030a14 100%);
   color: #e0e0f0;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
 }
 
 /* ===== Header ===== */
 
 .ra-header {
+  padding: 18px 32px;
   display: flex;
   align-items: center;
   backdrop-filter: blur(24px);
@@ -60,6 +61,8 @@
   border-radius: 6px;
   color: #8890b0;
   cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
 }
 .ra-header-btn:hover {
   border-color: rgba(0,255,157,0.3);
@@ -129,10 +132,11 @@
 .ra-sample-btn {
   padding: 16px 20px;
   background: transparent;
-  border: 1px solid #1e2247;
+  border: 1px solid rgba(0,255,157,0.2);
   border-radius: 12px;
   color: #7f88b2;
   cursor: pointer;
+  font-family: inherit;
   transition: all 0.2s;
 }
 .ra-sample-btn:hover {
@@ -347,9 +351,11 @@
   border: 1px solid rgba(0,255,157,0.15);
   font-size: 12px;
   color: #aeb7da;
+  font-family: inherit;
+  transition: all 0.2s;
 }
 .tag:hover {
   border-color: #00ff9d;
 }
 
-.hidden { display: none; }
+.ra-hidden { display: none; }

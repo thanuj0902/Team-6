@@ -16,8 +16,8 @@
 
 .sc-wrapper {
   min-height: 100vh;
-  background: linear-gradient(145deg,#0c111d 0%,#161d31 35%,#0f162a 65%,#070b18 100%);
-  font-family: 'Inter', sans-serif;
+  background: linear-gradient(145deg,#020818 0%,#040d20 35%,#060f1c 60%,#030a14 100%);
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
   color: #e2e2f0;
 }
 
@@ -54,7 +54,7 @@
 .sc-sep { color: rgba(99,102,241,0.3); margin: 0 6px; }
 .sc-badge {
   font-size: 11px;
-  color: #3d4468;
+  color: #697298;
   letter-spacing: 0.08em;
 }
 .sc-header-nav {
@@ -68,6 +68,13 @@
   border-radius: 6px;
   color: #8890b0;
   cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.sc-header-btn:hover {
+  border-color: rgba(99,102,241,0.4);
+  color: #c8d0f0;
+  background: rgba(99,102,241,0.08);
 }
 .sc-header-spacer { flex: 1; }
 .sc-main {
@@ -90,14 +97,14 @@
 .sc-title-em { color: #6366f1; font-style: italic; }
 .sc-sub {
   font-size: 13px;
-  color: #5a6080;
+  color: #697298;
   margin-bottom: 40px;
   line-height: 1.7;
 }
 .sc-field-label {
   font-size: 10px;
   letter-spacing: 0.12em;
-  color: #3d4468;
+  color: #697298;
   margin-bottom: 12px;
 }
 .sc-chip-row {
@@ -121,16 +128,16 @@
 }
 .sc-exp-unit {
   font-size: 13px;
-  color: #5a6080;
+  color: #697298;
 }
 .sc-range-labels {
   display: flex;
   justify-content: space-between;
   font-size: 10px;
-  color: #3d4468;
+  color: #697298;
   margin-top: 8px;
 }
-.sc-skill-hint { color: #5a6080; }
+.sc-skill-hint { color: #697298; }
 
 .sc-right {
   padding: 48px 40px;
@@ -142,7 +149,7 @@
 
 .sc-empty-state {
   text-align: center;
-  color: #3d4468;
+  color: #697298;
 }
 .sc-empty-icon { font-size: 64px; margin-bottom: 16px; }
 .sc-empty-text { font-size: 13px; letter-spacing: 0.04em; }
@@ -198,7 +205,7 @@
 }
 .sc-metric-label {
   font-size: 10px;
-  color: #3d4468;
+  color: #697298;
   letter-spacing: 0.1em;
   margin-bottom: 6px;
 }
@@ -209,7 +216,7 @@
 }
 .sc-metric-sub {
   font-size: 11px;
-  color: #5a6080;
+  color: #697298;
   margin-top: 4px;
 }
 
@@ -260,10 +267,16 @@
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.sc-growth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99,102,241,0.4);
 }
 .sc-disclaimer {
   font-size: 10px;
-  color: #3d4468;
+  color: #5a6080;
   margin-top: 20px;
   line-height: 1.6;
 }

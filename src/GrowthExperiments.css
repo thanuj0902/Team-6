@@ -71,6 +71,13 @@
   border-radius: 6px;
   color: #8890b0;
   cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.ge-dashboard-btn:hover {
+  border-color: rgba(236,72,153,0.4);
+  color: #c8d0f0;
+  background: rgba(236,72,153,0.08);
 }
 
 .ge-spacer {
@@ -95,6 +102,10 @@
   color: #697298;
 }
 
+.tab-btn:hover {
+  border-color: rgba(236,72,153,0.3);
+  color: #c8d0f0;
+}
 .tab-btn.active {
   border-color: #ec4899;
   background: rgba(236,72,153,0.12);
@@ -195,9 +206,12 @@
   border-radius: 10px;
   color: #a5b4fc;
   font-size: 12px;
-  font-family: monospace;
+  font-family: inherit;
   outline: none;
+  transition: all 0.2s;
 }
+.ge-inline-input::placeholder { color: #4a5070; }
+.ge-inline-input:focus { border-color: #ec4899; }
 
 .ge-email-input {
   flex: 1;
@@ -209,7 +223,10 @@
   font-size: 13px;
   font-family: inherit;
   outline: none;
+  transition: all 0.2s;
 }
+.ge-email-input::placeholder { color: #4a5070; }
+.ge-email-input:focus { border-color: #ec4899; }
 
 .ge-primary-btn {
   padding: 12px 20px;
@@ -220,6 +237,12 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 12px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.ge-primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236,72,153,0.4);
 }
 
 .ge-invite-btn {
@@ -231,11 +254,17 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 12px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.ge-invite-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236,72,153,0.4);
 }
 
 .ge-card-footnote {
   font-size: 11px;
-  color: #4a5070;
+  color: #697298;
 }
 
 .ge-share-stack {
@@ -252,3 +281,4 @@
 .ge-share-twitter { background: #1da1f2; color: #fff; }
 .ge-share-linkedin { background: #0a66c2; color: #fff; }
 .ge-share-whatsapp { background: #25d366; color: #fff; }
+.share-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }

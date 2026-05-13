@@ -2,9 +2,9 @@
 
 .oc-wrapper {
   min-height: 100vh;
-  background: linear-gradient(145deg,#1a1a1a 0%,#2d2d2d 35%,#1a1a1a 65%,#0a0a0a 100%);
+  background: linear-gradient(145deg,#020818 0%,#040d20 35%,#060f1c 60%,#030a14 100%);
   color: #e2e2f0;
-  font-family: 'Inter', 'DM Sans', sans-serif;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
 }
 
 /* ===== Header ===== */
@@ -64,6 +64,7 @@
   border-radius: 6px;
   color: #8890b0;
   cursor: pointer;
+  font-family: inherit;
   transition: all 0.2s;
 }
 .oc-header-btn:hover {
@@ -465,7 +466,7 @@
 }
 .oc-verdict-ctc-label {
   font-size: 10px;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.55);
   margin-bottom: 4px;
 }
 .oc-verdict-ctc-value {
@@ -489,7 +490,7 @@
 }
 .oc-metric-label {
   font-size: 10px;
-  color: rgba(255,255,255,0.3);
+  color: #697298;
   margin-bottom: 4px;
 }
 .oc-metric-value {
@@ -520,7 +521,7 @@
   margin-bottom: 5px;
 }
 .oc-dist-label { font-size: 12px; }
-.oc-dist-label-normal { color: #5a6080; }
+.oc-dist-label-normal { color: #697298; }
 .oc-dist-label-bold {
   color: #e2e2f0;
   font-weight: 600;

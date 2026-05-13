@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
 
-.card {
+.ed-card {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 16px;
   padding: 20px 24px;
 }
 
-.badge {
+.ed-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -17,13 +17,13 @@
   transition: all 0.2s;
 }
 
-.badge.earned {
+.ed-badge.earned {
   background: rgba(16,185,129,0.1);
   border: 1px solid rgba(16,185,129,0.2);
   color: #6ee7b7;
 }
 
-.badge.locked {
+.ed-badge.locked {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.06);
   color: #4a5070;
@@ -101,6 +101,13 @@
   border-radius: 6px;
   color: #8890b0;
   cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.ed-dashboard-btn:hover {
+  border-color: rgba(16,185,129,0.4);
+  color: #c8d0f0;
+  background: rgba(16,185,129,0.08);
 }
 
 .ed-header-spacer {
@@ -144,6 +151,12 @@
   border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.ed-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16,185,129,0.4);
 }
 
 .ed-loading {
@@ -227,7 +240,7 @@
 .ed-empty-activity {
   text-align: center;
   padding: 30px;
-  color: #4a5070;
+  color: #697298;
   font-size: 13px;
 }
 
@@ -245,6 +258,10 @@
   background: rgba(255,255,255,0.02);
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.2s;
+}
+.ed-activity-item:hover {
+  background: rgba(255,255,255,0.04);
 }
 
 .ed-activity-left {
@@ -264,5 +281,5 @@
 
 .ed-activity-date {
   font-size: 10px;
-  color: #4a5070;
+  color: #697298;
 }

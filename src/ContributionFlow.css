@@ -71,6 +71,13 @@
   border-radius: 6px;
   color: #8890b0;
   cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.cf-nav-btn:hover {
+  border-color: rgba(139,92,246,0.4);
+  color: #c8d0f0;
+  background: rgba(139,92,246,0.08);
 }
 
 .cf-spacer {
@@ -125,6 +132,10 @@
   color: #697298;
 }
 
+.cf-tab-btn:hover {
+  border-color: rgba(139,92,246,0.3);
+  color: #c8d0f0;
+}
 .cf-tab-btn.active {
   border-color: #8b5cf6;
   background: rgba(139,92,246,0.12);
@@ -160,7 +171,7 @@
 
 .cf-section-label {
   font-size: 11px;
-  color: #4a5070;
+  color: #697298;
   letter-spacing: 0.06em;
   margin-bottom: 4px;
 }
@@ -190,6 +201,7 @@
   outline: none;
   transition: all 0.2s;
 }
+.cf-inp::placeholder { color: #4a5070; }
 
 .cf-inp:focus {
   border-color: #8b5cf6;
@@ -220,6 +232,10 @@
   background: linear-gradient(135deg, #8b5cf6, #6d28d9);
   color: #fff;
 }
+.cf-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139,92,246,0.4);
+}
 
 .cf-rating-group {
   display: flex;
@@ -232,7 +248,12 @@
   border-radius: 10px;
   cursor: pointer;
   font-size: 18px;
+  font-family: inherit;
   transition: all 0.2s;
+}
+.cf-rating-btn:hover {
+  border-color: rgba(139,92,246,0.5);
+  transform: scale(1.1);
 }
 
 .cf-mt-8 {

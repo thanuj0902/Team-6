@@ -332,7 +332,7 @@ export default function ResumeAnalyzer() {
             onDragLeave={() => setDragOver(false)}
             onDrop={(e) => { e.preventDefault(); setDragOver(false); handleFile(e.dataTransfer.files[0]); }}
           >
-            <input ref={fileRef} type="file" accept=".txt,.md" className="hidden" onChange={(e) => handleFile(e.target.files[0])} />
+            <input ref={fileRef} type="file" accept=".txt,.md" className="ra-hidden" onChange={(e) => handleFile(e.target.files[0])} />
             <div className="ra-drop-icon">⬆</div>
             <div className="ra-drop-text">Upload .txt or .md resume</div>
           </div>

@@ -119,7 +119,7 @@ export default function EngagementDashboard() {
               <div className="ed-section-label">ACHIEVEMENT BADGES</div>
               <div className="ed-badges-container">
                 {badges.map(b => (
-                  <div key={b.name} className={`badge ${b.earned ? 'earned' : 'locked'}`}>
+                  <div key={b.name} className={`ed-badge ${b.earned ? 'earned' : 'locked'}`}>
                     <span>{b.earned ? '🏅' : '🔒'}</span>
                     <div>
                       <div className="ed-badge-name">{b.name}</div>
@@ -130,7 +130,7 @@ export default function EngagementDashboard() {
               </div>
             </div>
 
-            <div className="card">
+            <div className="ed-card">
               <div className="ed-section-label">RECENT ACTIVITY</div>
               {activities.length === 0 ? (
                 <div className="ed-empty-activity">
