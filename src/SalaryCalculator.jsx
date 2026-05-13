@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { storage } from "./storage";
 
 const ROLES = ["Software Engineer", "Senior Engineer", "Staff Engineer", "Principal Engineer", "Engineering Manager", "Director of Engineering", "VP Engineering", "Product Manager", "Senior PM", "Data Scientist", "ML Engineer", "Designer", "DevOps / SRE", "QA Engineer"];
 const SKILLS = ["React", "Node.js", "Python", "Java", "Go", "Kubernetes", "AWS/GCP", "PostgreSQL", "Machine Learning", "System Design", "Leadership", "Product Sense"];
@@ -40,13 +39,6 @@ export default function SalaryCalculator() {
   const [skills, setSkills] = useState([]);
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    const saved = storage.load('salary_results');
-    if (saved) {
-      setShow(true);
-    }
-  }, []);
-
   const toggleSkill = (s) => setSkills(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
 
   const base = BASE_SALARIES[role] || 2000000;
@@ -64,15 +56,6 @@ export default function SalaryCalculator() {
     if (taxRegime === "old") return salary * 0.28;
     else return salary * 0.20;
   };
-
-  // Save results when they are calculated
-  useEffect(() => {
-    if (show) {
-      storage.save('salary_results', {
-        role, exp, city, tier, company, estimated, low, high
-      });
-    }
-  }, [show, role, exp, city, tier, company, estimated, low, high]);
 
   const taxAmt = calculateTax(estimated);
   const takeHomeMonthly = ((estimated - taxAmt) / 12);

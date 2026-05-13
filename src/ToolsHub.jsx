@@ -34,8 +34,14 @@ const ToolsHub = ({ onSelectTool }) => {
       background: 'linear-gradient(145deg, #020818 0%, #040d20 35%, #060f1c 60%, #030a14 100%)',
       color: '#e0e0f0',
       fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-      padding: '40px 24px'
     }}>
+      <header style={{ width:"100%",padding:"18px 32px",display:"flex",alignItems:"center",gap:14,backdropFilter:"blur(24px)",position:"sticky",top:0,background:"rgba(13,11,34,0.82)",borderBottom:"1px solid rgba(99,102,241,0.13)",zIndex:20 }}>
+        <div style={{ width:9,height:9,background:"linear-gradient(135deg,#6366f1,#3b82f6)",borderRadius:"50%",boxShadow:"0 0 12px #6366f1aa" }}/>
+        <span style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:16,letterSpacing:"0.1em",color:"#fff" }}>TALENT<span style={{ color:"#6366f1" }}>DASH</span></span>
+        <span style={{ color:"rgba(99,102,241,0.3)",margin:"0 6px" }}>·</span>
+        <span style={{ fontSize:11,color:"#a5b4fc",letterSpacing:"0.1em" }}>GROWTH SUITE</span>
+      </header>
+      <div style={{ padding: '40px 24px' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
         .hub-card {
@@ -156,7 +162,7 @@ const ToolsHub = ({ onSelectTool }) => {
           <p style={{ color: '#8890b0', fontSize: 14, marginBottom: 20 }}>
             Sign up for TalentDash to save your analysis and get personalized growth roadmaps.
           </p>
-          <button style={{
+          <button onClick={() => onSelectTool('onboarding')} style={{
             padding: '12px 24px',
             background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
             color: '#fff',
@@ -170,6 +176,7 @@ const ToolsHub = ({ onSelectTool }) => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { storage } from "./storage";
 
 const SAMPLE_RESUME = `John Doe | john@email.com | linkedin.com/in/johndoe | Bangalore
 
@@ -28,14 +27,6 @@ export default function ResumeAnalyzer() {
   const [dragOver, setDragOver] = useState(false);
 
   const fileRef = useRef();
-
-  useEffect(() => {
-    const saved = storage?.load?.("resume_results");
-
-    if (saved) {
-      setResult(saved);
-    }
-  }, []);
 
   const ROLES = [
     "Software Engineer",
@@ -165,8 +156,6 @@ export default function ResumeAnalyzer() {
       };
 
       setResult(simulationResult);
-
-      storage?.save?.("resume_results", simulationResult);
     } catch (e) {
       console.error(e);
       setError("Analysis failed. Please try again.");

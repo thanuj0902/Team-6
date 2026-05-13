@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { storage } from "./storage";
 
 const ROLES = ["Software Engineer", "Senior Engineer", "Staff Engineer", "Principal Engineer", "Engineering Manager", "Director of Engineering", "VP Engineering", "Product Manager", "Senior PM", "Data Scientist", "ML Engineer", "Designer", "DevOps / SRE", "QA Engineer"];
 const SKILLS = ["React", "Node.js", "Python", "Java", "Go", "Kubernetes", "AWS/GCP", "PostgreSQL", "Machine Learning", "System Design", "Leadership", "Product Sense"];
@@ -58,23 +57,6 @@ export default function OfferCalculator() {
   const [mStep, setMStep]       = useState(1);
   const [animIn, setAnimIn]     = useState(true);
   const fileRef = useRef();
-
-  useEffect(() => {
-    const saved = storage.load('offer_results');
-    if (saved) {
-      setMode('result');
-      setRole(saved.role);
-      setExp(saved.exp);
-      setCity(saved.city);
-      setCompany(saved.company);
-      setLevel(saved.level);
-      setBase(saved.base);
-      setBonus(saved.bonus);
-      setEquity(saved.equity);
-      setEquityType(saved.equityType);
-      setJoining(saved.joining);
-    }
-  }, []);
 
   const [role, setRole]       = useState("Software Engineer");
   const [exp, setExp]         = useState("2–5 yrs");
@@ -146,19 +128,6 @@ export default function OfferCalculator() {
       if (d.equityType) setEquityType(d.equityType);
       if (d.equity) setEquity(String(d.equity));
       if (d.joining) setJoining(String(d.joining));
-
-      storage.save('offer_results', {
-        role: d.role || role, 
-        city: d.city || city, 
-        exp: d.exp || exp, 
-        company: d.company || company,
-        level: d.level || level, 
-        base: String(d.base || base), 
-        bonus: String(d.perfBonus || bonus),
-        equityType: d.equityType || equityType, 
-        equity: String(d.equity || equity), 
-        joining: String(d.joining || joining)
-      });
 
       setMode("result");
     } catch (e) {

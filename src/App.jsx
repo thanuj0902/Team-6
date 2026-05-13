@@ -31,32 +31,7 @@ function App() {
       color: 'white',
       fontFamily: 'sans-serif'
     }}>
-      <nav style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '10px',
-        padding: '20px',
-        background: 'rgba(0,0,0,0.3)',
-        borderBottom: '1px solid rgba(99,102,241,0.3)'
-      }}>
-        {Object.entries(tabs).map(([id, { name }]) => (
-          <button
-            key={id}
-            onClick={() => setActiveTab(id)}
-            style={{
-              padding: '10px 20px',
-              cursor: 'pointer',
-              background: activeTab === id ? '#6366f1' : 'transparent',
-              color: 'white',
-              border: '1px solid #6366f1',
-              borderRadius: '8px',
-              transition: '0.2s'
-            }}
-          >
-            {name}
-          </button>
-        ))}
-      </nav>
+
 
       <main style={{ padding: '20px' }}>
         {tabs[activeTab].component}
